@@ -18,14 +18,12 @@
 
     <xsl:template name="xquery-view">
       <xsl:result-document href="#meters" method="ixsl:replace-content">
-          <xsl:value-of select="name(.)"/>
+          <a href="http://localhost:8002/manage/v2/forests?view=metrics&amp;forest-metrics={name(.)}" target="_new"><xsl:value-of select="name(.)"/></a>
           <xsl:apply-templates select="meter:summary"/>
       </xsl:result-document>    
     </xsl:template>
 
     <xsl:template match="meter:summary">
-      <span class="inlinesparkline">1,2,4,5</span>
-      <span class="inlinesparkline"><xsl:value-of select="string-join(meter:data/meter:entry/meter:value,',')"/></span>
       <table border="1">
       <xsl:for-each select="meter:data/meter:entry">
       <tr>
@@ -34,11 +32,7 @@
       </tr>
      </xsl:for-each>
       </table>
-      <script type="text/javascript" language="javascript">
-        $(function() {
-        $('.inlinesparkline').sparkline();
-        });
-      </script>
+
     </xsl:template> 
     
 </xsl:transform>	

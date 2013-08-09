@@ -45,8 +45,12 @@ declare variable $default-requests as element(rest:request)* := (
     <request xmlns="http://marklogic.com/appservices/rest" uri="^/index.html$" endpoint="/rxq-rewriter.xqy?mode={$rxq:_PASSTHRU_MODE}" >
     <http method="GET" user-params="allow"/>
       <uri-param name="path">index.html</uri-param>
+    </request>,
+    <request xmlns="http://marklogic.com/appservices/rest" uri="^/bstest.html$" endpoint="/rxq-rewriter.xqy?mode={$rxq:_PASSTHRU_MODE}" >
+    <http method="GET" user-params="allow"/>
+      <uri-param name="path">bstest.html</uri-param>
     </request>
-   );
+);
 
 declare option xdmp:mapping "false";
 
