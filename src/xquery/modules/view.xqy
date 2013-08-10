@@ -2,9 +2,6 @@ xquery version "1.0-ml";
 
 module namespace view = "https://github.com/dashML/view";
 
-import module namespace meter="http://marklogic.com/manage/meters"
-    at "/MarkLogic/manage/meter/meter.xqy";
-    
 declare namespace rxq="﻿http://exquery.org/ns/restxq";
 
 declare
@@ -26,19 +23,20 @@ function view:home-page(
 <p>Make it easy to create custom dashboard page of metrics, leveraging MarkLogic meters</p>
 <h3>components</h3>
 <ul>
-  <li>dashboard builder- interactive form for generating page</li>
-  <li>dashboard renderer- renderer generates responsive design page of metrics</li>
+  <li><a href="/dash/builder">dashboard builder</a>- interactive form for generating page using saxon-ce, generates a dash model </li>
+  <li><a href="/dash/render">dashboard renderer</a>- renderer generates responsive design page of metrics</li>
 </ul>
 <h3>technology</h3>
 <ul>
-  <li>marklogic meters</li>
-  <li>saxon-ce</li>
-  <li>javscript</li>
+  <li>marklogic 7.0 meters</li>
+  <li><a href="http://github.com/xquery/rxq" target="_new">rxq</a>- app framework</li>
+  <li><a href="http://saxonica.com" target="_new">saxon-ce</a>- form handler</li>
+  <li><a href="http://getbootstrap.com/" target="_new">bootstrap</a>- css/html5 template</li>
 </ul>
 <h3>models</h3>
 <ul>
   <li>meters</li>
-  <li>pages</li>
+  <li>dash page that contains dash widget</li>
   <li>dash widgets</li>
 </ul>
 <h3>features</h3>
@@ -47,6 +45,11 @@ function view:home-page(
   <li>set alerts/limits</li>
   <li>make 'live'</li>
 </ul>
+<h3>test</h3>
+<ul>
+  <li><a href="http://localhost:9050/xray" target="_new">xray</a></li>
+  <li></li>
+</ul>
 </body>
 </html>
 };
@@ -54,20 +57,32 @@ function view:home-page(
 
 declare
   %rxq:GET
-  %rxq:path('/meter/(.*)/(.*)/(.*)')
-  %rxq:produces('application/xml')
-function view:meter-sample(
-  $resource,
-  $meter,
-  $period
+  %rxq:path('/dashml')
+  %rxq:produces('text/html')
+function view:overview-page(
+  $var1
 )
-{   
-  let $start := xs:dateTime("2013-08-08T15:00:00")
-  let $end   := xs:dateTime("2013-08-08T23:00:00")
-  let $params := map:map()  
-  let $_ := map:put($params,"summary",true())
-  let $_ := map:put($params,"detail",true())
-  let $_ := map:put($params,"aggregation","avg")
-  let $_ := map:put($params,"format","xml")
-  return meter:time-series(xs:QName("meter:" || $resource || "-status"), (), $meter,$period,(),(),$params) 
+{
+<html>
+<head>
+<title>dashML</title>
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet" media="screen"></link>
+
+</head>
+<body>
+<h1>dashML</h1>
+<p>Easy to create dashboards for managing MarkLogic.</p>
+<h3>Application</h3>
+<ul>
+  <li><a href="/dashml/builder">dashboard builder</a>- interactive form for generating page using saxon-ce, generates a dash model </li>
+  <li><a href="/dashml/render">dashboard renderer</a>- renderer generates responsive design page of metrics</li>
+</ul>
+<h3>Model api</h3>
+<ul>
+  <li><a href="/data/history">history</a>- history endpoint for the application </li>
+  <li><a href="/data/dash">dash</a>-dash endpoint</li>
+</ul>
+</body>
+</html>
 };
+

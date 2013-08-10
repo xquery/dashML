@@ -35,6 +35,18 @@ import module namespace cprof="com.blakeley.cprof" at "/lib/cprof.xqy";
 import module namespace view = "https://github.com/dashML/view"
   at "/modules/view.xqy";
 
+ import module namespace builder = "https://github.com/dashML/builder"
+  at "/modules/dash-builder.xqy";
+  
+import module namespace render = "https://github.com/dashML/render"
+  at "/modules/dash-render.xqy";  
+
+import module namespace history = "https://github.com/dashML/model/history"
+  at "/modules/history-model.xqy";
+
+import module namespace dash = "https://github.com/dashML/model/dash"
+  at "/modules/dash-model.xqy";
+  
 (: define non-restxq REST requests, example illustrates passthru mode :)
 declare namespace rest = "http://marklogic.com/appservices/rest";
 declare variable $default-requests as element(rest:request)* := (
