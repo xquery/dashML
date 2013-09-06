@@ -1,0 +1,38 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+targetNamespace="https://github.com/dashML/model/dash"
+xmlns="https://github.com/dashML/model/dash"
+xmlns:dash-model="https://github.com/dashML/model/dash"
+xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="dashes">
+    <xs:complexType>
+      <xs:all>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="dash-model:dash"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="dash">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="title"/>
+        <xs:element
+          ref="dash-model:widget" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute type="xs:unsignedLong" name="id"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="widget">
+    <xs:complexType>
+        <xs:sequence>
+          <xs:element type="xs:string" name="title"/>
+          <xs:element type="xs:string" name="type"/>
+          <xs:element type="xs:string" name="resource"/>
+          <xs:element type="xs:string" name="meter"/>
+        </xs:sequence>
+        <xs:attribute type="xs:unsignedLong" name="id"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

@@ -12,28 +12,30 @@
     extension-element-prefixes="ixsl"
     version="2.0">
 
-    <xsl:template match="meter:*" name="main">   
-        <xsl:call-template name="xquery-view"/>
-    </xsl:template>
+  <xsl:template match="/"></xsl:template>
 
-    <xsl:template name="xquery-view">
-      <xsl:result-document href="#meters" method="ixsl:replace-content">
-          <a href="http://localhost:8002/manage/v2/forests?view=metrics&amp;forest-metrics={name(.)}" target="_new"><xsl:value-of select="name(.)"/></a>
-          <xsl:apply-templates select="meter:summary"/>
-      </xsl:result-document>    
-    </xsl:template>
+  <xsl:template match="button[@id eq 'save-dash']" mode="ixsl:onclick">
+  </xsl:template>
 
-    <xsl:template match="meter:summary">
-      <table border="1">
-      <xsl:for-each select="meter:data/meter:entry">
-      <tr>
-        <td><xsl:value-of select="meter:dt"/></td>
-        <td><xsl:value-of select="meter:value"/></td>
-      </tr>
-     </xsl:for-each>
-      </table>
+  <xsl:template match="button[@id eq 'add-widget']" mode="ixsl:onclick">
+      <xsl:result-document href="#state" method="ixsl:replace-content">
+        <dash>
+        <xsl:copy-of select="//div[@id eq 'state']/*"/>
+        <widget>active</widget>
+        </dash>
+      </xsl:result-document>
+  </xsl:template>
 
-    </xsl:template> 
-    
-</xsl:transform>	
+  <xsl:template match="button[@id eq 'new-dash']" mode="ixsl:onclick">
+      <xsl:result-document href="#state" method="ixsl:replace-content">
+        
+        <widget>
+        <xsl:copy-of select="ixsl:page()//input/@value/data(.)"/>
+        </widget>
+      </xsl:result-document>
+  </xsl:template>
+
+  <xsl:template match="text()"/>
+
+</xsl:transform>
 

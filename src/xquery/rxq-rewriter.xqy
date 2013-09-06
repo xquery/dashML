@@ -29,45 +29,26 @@ import module namespace cprof="com.blakeley.cprof" at "/lib/cprof.xqy";
 
 (:~ rewriter for RXQ.
  :
- : NOTE- This version of the rxq-rewriter is modified to take advantage of Michael Blakely excellent cprof profiling library
  :
  :)
 import module namespace view = "https://github.com/dashML/view"
   at "/modules/view.xqy";
 
- import module namespace builder = "https://github.com/dashML/builder"
-  at "/modules/dash-builder.xqy";
-  
-import module namespace render = "https://github.com/dashML/render"
-  at "/modules/dash-render.xqy";  
-
-import module namespace history = "https://github.com/dashML/model/history"
-  at "/modules/history-model.xqy";
-
-import module namespace dash = "https://github.com/dashML/model/dash"
-  at "/modules/dash-model.xqy";
-  
 (: define non-restxq REST requests, example illustrates passthru mode :)
 declare namespace rest = "http://marklogic.com/appservices/rest";
 declare variable $default-requests as element(rest:request)* := (
-    <request xmlns="http://marklogic.com/appservices/rest" uri="^/resources/(.*)$" endpoint="/rxq-rewriter.xqy?mode={$rxq:_PASSTHRU_MODE}" >
-    <http method="GET" user-params="allow"/>
+    <request xmlns="http://marklogic.com/appservices/rest"
+      uri="^/resources/(.*)$"
+      endpoint="/rxq-rewriter.xqy?mode={$rxq:_PASSTHRU_MODE}">
+      <http method="GET" user-params="allow"/>
       <uri-param name="path">resources/$1</uri-param>
-    </request>,
-    <request xmlns="http://marklogic.com/appservices/rest" uri="^/index.html$" endpoint="/rxq-rewriter.xqy?mode={$rxq:_PASSTHRU_MODE}" >
-    <http method="GET" user-params="allow"/>
-      <uri-param name="path">index.html</uri-param>
-    </request>,
-    <request xmlns="http://marklogic.com/appservices/rest" uri="^/bstest.html$" endpoint="/rxq-rewriter.xqy?mode={$rxq:_PASSTHRU_MODE}" >
-    <http method="GET" user-params="allow"/>
-      <uri-param name="path">bstest.html</uri-param>
     </request>
 );
 
 declare option xdmp:mapping "false";
 
 (:~ Rewriter routes between the following three conditions;
- : 
+ :
  :     rewrite - rewrites url using rxq:rewrite
  :
  :     mux - evaluates function for rewritten url using rxq:mux
@@ -76,22 +57,28 @@ declare option xdmp:mapping "false";
  :
  :)
 let $perf := fn:false()
+let $cache := fn:false()
 let $mode := xdmp:get-request-field("mode", $rxq:_REWRITE_MODE)
 return
- if ($mode eq $rxq:_REWRITE_MODE) then rxq:rewrite($default-requests, $rxq:cache-flag)
- else if($mode eq $rxq:_MUX_MODE) then
-   (
-     if($perf) then cprof:enable() else (),
-     rxq:mux(xdmp:get-request-field("produces",$rxq:default-content-type),
-     xdmp:get-request-field("consumes",$rxq:default-content-type),
-     fn:function-lookup(xs:QName(xdmp:get-request-field("f")),xs:integer(xdmp:get-request-field("arity","0"))),
-     xs:integer(xdmp:get-request-field("arity","0")) ),    
-     if($perf) then xdmp:xslt-eval($cprof:report-xsl, cprof:report()) else ()	   
-   )	   
-else if ($mode eq $rxq:_PASSTHRU_MODE) then rxq:passthru(xdmp:get-request-field("path"))
-else
-   rxq:handle-error()
-
-
-  
-
+ if ($mode eq $rxq:_REWRITE_MODE)
+     then rxq:rewrite($default-requests,$cache)
+     else if($mode eq $rxq:_MUX_MODE) then
+     (
+     if($perf)
+         then cprof:enable()
+         else (),
+     rxq:mux(
+         xdmp:get-request-field("produces",$rxq:default-content-type),
+         xdmp:get-request-field("consumes",$rxq:default-content-type),
+         fn:function-lookup(xs:QName(xdmp:get-request-field("f")),
+         xs:integer(xdmp:get-request-field("arity","0"))),
+         xs:integer(xdmp:get-request-field("arity","0"))
+     ),
+     if($perf)
+         then xdmp:xslt-eval($cprof:report-xsl, cprof:report())
+         else ()
+     )
+     else if ($mode eq $rxq:_PASSTHRU_MODE)
+         then rxq:passthru(xdmp:get-request-field("path"))
+     else
+         rxq:handle-error()
