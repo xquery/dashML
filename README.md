@@ -29,7 +29,7 @@ Now point your web browser to http://localhost:####/xray which will run all test
 
 ## More Info on technologies
 
-* [purecssp](http://purecss.io/)
+* [purecss](http://purecss.io/) - css templates
 * RXQ github [repository](https://github.com/xquery/rxq).
 * [EXQuery RESTXQ Draft Specification](http://exquery.github.com/exquery/exquery-restxq-specification/restxq-1.0-specification.html#method-annotation).
 * Adam Retter's [RESTXQ](http://archive.xmlprague.cz/2012/presentations/RESTful_XQuery.pdf).
