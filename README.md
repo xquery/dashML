@@ -29,3 +29,15 @@ create an appserver, providing the following details;
 * root: provide directory where dashml/src ison your filesystem
 
 Now point your web browser to http://localhost:####/xray which will run all tests
+
+
+# More Info on technologies
+
+* [purecssp](http://purecss.io/)
+* RXQ github [repository](https://github.com/xquery/rxq).
+* [EXQuery RESTXQ Draft Specification](http://exquery.github.com/exquery/exquery-restxq-specification/restxq-1.0-specification.html#method-annotation).
+* Adam Retter's [RESTXQ](http://archive.xmlprague.cz/2012/presentations/RESTful_XQuery.pdf).
+* [JSR-311](http://download.oracle.com/otndocs/jcp/jaxrs-1.0-fr-eval-oth-JSpec/).
+ 
+The usage of RESTXQ annotations turns out to be a very concise way of building up flexible RESTFul interfaces, as well as providing the basis from which to create MVC architectures for our XQuery web applications.
+
