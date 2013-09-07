@@ -1,3 +1,5 @@
+note- MarkLogic 7 is not released yet!
+
 # dashML
 
 MarkLogic 7.0 introduces more tools for monitoring performance of your MarkLogic server. dashML leverages these tools to make it easy to create lightweight, responsive dashboards giving you up-to-date information on the health and performance of your applications.
