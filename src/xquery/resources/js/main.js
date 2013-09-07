@@ -24,17 +24,21 @@ var to;
         $('#makelive').prop('checked', true);
            setTimeout(function(){
                window.location.href=window.location.href
-           }, 10000);
+           }, 30000);
      }
-    
+
     $('#makelive').change(function(){
        if (this.checked){
            setTimeout(function(){
                window.location.href=window.location.href + '?live=true'
-           }, 10000);
+           }, 30000);
        }else{
                window.location.href=window.location.href.replace(/\?.*/,'')
        }
+    });
+
+    $('#period').change(function(){
+        window.location.href=window.location.href.replace(/\?.*/,'') + '?period=' + $('#period').val()
     });
 
 }());
