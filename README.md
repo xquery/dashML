@@ -6,7 +6,6 @@ MarkLogic 7.0 introduces more tools for monitoring performance of your MarkLogic
 
 MarkLogic 7.0
 
-
 ## To install
 
 First, you need to download and install MarkLogic 7. Second, create an appserver, providing the following details;
@@ -24,6 +23,11 @@ create an appserver, providing the following details;
 * root: provide directory where dashml/src ison your filesystem
 
 Now point your web browser to http://localhost:####/xray which will run all tests
+
+## FAQ
+
+* 'X is not working' - make sure you have run long enough for meters to be generated (or switch to last 60 minutes)
+* submit an [issue](https://github.com/xquery/dashML/issues)
 
 
 ## More Info on technologies
