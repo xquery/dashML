@@ -1,6 +1,7 @@
 (function(){
 var to;
 
+   
 	function pieceHeights(){
 		to = setTimeout(function(){
 			$(".pure-g-r").each(function(i,el){

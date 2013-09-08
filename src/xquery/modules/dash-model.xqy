@@ -1,6 +1,8 @@
 xquery version "1.0-ml";
 
-(:~ dash model
+module namespace model = "https://github.com/dashML/model/dash";
+
+(:~ module: dash-model - responsible for rendering views using RXQ
 :
 : model:all()
 : model:get($id)
@@ -12,8 +14,6 @@ xquery version "1.0-ml";
 :
 :)
 
-module namespace model = "https://github.com/dashML/model/dash";
-
 import module namespace meter="http://marklogic.com/manage/meters"
     at "/MarkLogic/manage/meter/meter.xqy";
 
@@ -24,8 +24,8 @@ declare namespace rxq="﻿http://exquery.org/ns/restxq";
 declare option xdmp:mapping "false";
 
 declare variable $model:_DASHML_ERR_CREATE := "DASHML_ERR_CREATE";
-declare variable $model:_COLLECTION := "dashml";
 
+declare variable $model:_COLLECTION := "dashml";
 
 (:~ model:all() -
 :

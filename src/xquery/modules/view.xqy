@@ -17,6 +17,7 @@ declare namespace meter="http://marklogic.com/manage/meters";
 
 declare default element namespace "https://github.com/dashML/model/dash";
 
+
 (:~ view:spec() - about dashML page
 :
 : @param id
@@ -39,15 +40,14 @@ function view:spec() as element()
 <script src="/resources/js/vendor/modernizr-2.6.2.min.js">>&#160;</script>
 </head>
 <body>
-<div class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-blackbg">
+  <div class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-blackbg">
     <ul>
-        <li class="pure-menu-selected"><a href="/">dashML</a></li>
-        <li><a href="/builder">build dashboards</a></li>
+      <li class="pure-menu-selected"><a href="/">dashML</a></li>
+      <li><a href="/builder">build dashboards</a></li>
     </ul>
-</div>
-
-    <div class="splash">
-        <div class="pure-g-r">
+  </div>
+  <div class="splash">
+    <div class="pure-g-r">
             <div class="pure-u-1-3">
                 <div class="l-box splash-image">
                     <img src="resources/history-screenshot.jpg"
@@ -55,34 +55,40 @@ function view:spec() as element()
                          alt="Placeholder image for example."/>
                 </div>
             </div>
-
             <div class="pure-u-2-3">
                 <div class="l-box splash-text">
                     <h1 class="splash-head">
                         dashboards with MarkLogic 7.0.
                     </h1>
-
                     <h2 class="splash-subhead">
-                        MarkLogic 7.0 introduces more tools for <a href="http://localhost:8002/history" target="_history">monitoring performance</a> of your MarkLogic server. dashML leverages these tools to make it easy to create lightweight, responsive dashboards giving you up-to-date information on the health and performance of your applications.
+                        MarkLogic 7.0 introduces more tools for
+                        <a href="http://{xdmp:host-name()}:8002/history"
+                          target="_history">
+                        monitoring performance</a> of your MarkLogic server.
+                        dashML leverages these tools to make it easy to create
+                        lightweight, responsive dashboards giving you up-to-date
+                        information on the health and performance of your
+                        applications.
                     </h2>
-
                     <p>
-                        <a href="/builder" class="pure-button primary-button">Start building dashboards</a>
+                        <a href="/builder" class="pure-button primary-button">
+                          Start building dashboards</a>
                     </p>
                 </div>
             </div>
         </div>
     </div>
-
  <div class="content">
         <div class="pure-g-r content-ribbon">
             <div class="pure-u-2-3">
                 <div class="l-box">
                     <h4 class="content-subhead">Features</h4>
                     <ul>
-                       <li>create dashboards based on MarkLogic history performance metrics</li>
+                       <li>create dashboards based on MarkLogic
+                         history performance metrics</li>
                        <li>multiple dashboards, each with multiple metrics</li>
-                       <li>responsive layout - works in most mobile and tablet environments</li>
+                       <li>responsive layout - works in most
+                         mobile and tablet environments</li>
                     </ul>
                 </div>
             </div>
@@ -156,7 +162,7 @@ function view:builder(
   <script src="/resources/js/vendor/modernizr-2.6.2.min.js">>&#160;</script>
 </head>
 <body>
-<div class="pure-menu pure-menu-open pure-menu-horizontal  pure-menu-blackbg">
+<div class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-blackbg">
     <ul>
         <li><a href="/">dashML</a></li>
         <li class="pure-menu-selected"><a href="/builder">build dashboards</a></li>
@@ -165,6 +171,8 @@ function view:builder(
 <div class="pure-g-r">
     <div class="pure-u-1-2 builder-div">
     <h2>dashML build</h2>
+    <i>add, view and remove dashboards.
+    </i>
     <form method="POST" action="/builder" class="pure-form">
       <fieldset>
         <table  class="pure-table dash-table">
@@ -187,31 +195,38 @@ function view:builder(
                 </a>
               </td>
               <td>
-                <a href="/builder/{$dash-id}" title="edit dash" class="pure-button">
+                <a href="/builder/{$dash-id}"
+                  title="edit dash" class="pure-button">
                 edit
                 </a>
               </td>
               <td>
-                <a href="/render/{$dash-id}" target="render-frame" title="view dash" class="pure-button">
+                <a href="/render/{$dash-id}" target="render-frame"
+                  title="view dash" class="pure-button">
                 view
                 </a>
               </td>
               <td>
-                <a href="/builder/delete/{$dash-id}" id="delete" title="delete dash" class="pure-button">remove</a>
+                <a href="/builder/delete/{$dash-id}" id="delete"
+                  title="delete dash" class="pure-button">remove</a>
               </td>
               </tr>
           }
     </tbody>
    </table>
-   <input id="name" name="name" type="text"/><button id="create" title="create new dash" class="pure-button pure-button-primary">create dash</button>
+   <input id="name" name="name" type="text"/>
+     <button id="create" title="create new dash"
+       class="pure-button pure-button-primary">create dash</button>
   </fieldset>
  </form>
-
 {
  if($id) then
- <h3>edit dashboard: 
+ (
+ <h3>edit dashboard:
  <span style="color:#888">{dash-model:get($id)/dash-model:title/data()}</span>
- </h3>
+ </h3>,
+ <i>add and remove meter widgets from this dashboard</i>
+ )
  else ()
 }
  <form method="POST" action="/builder/{$id}" class="pure-form">
@@ -234,7 +249,8 @@ function view:builder(
      <td>{$widget/dash-model:type/data()}</td>
      <td>{$widget/dash-model:resource/data()}</td>
      <td>{$widget/dash-model:meter/data()}</td>
-     <td><a href="/builder/widget/delete/{$id}/{$widget/@id/data()}" title="delete widget" class="pure-button">delete</a></td>
+     <td><a href="/builder/widget/delete/{$id}/{$widget/@id/data()}"
+       title="delete widget" class="pure-button">delete</a></td>
      </tr>
      }
      </tbody>
@@ -245,13 +261,15 @@ if($id) then
 <input id="title" name="title" type="text"/>
 <select name="type">
   <option>sparkline</option>
-  <option>meter</option>
-  <option>timeseries</option>
+  <option>log</option>
+  <!--option>timeseries</option-->
 </select>
 <select name="meter">
 {history-model:get-metric-names()}
 </select>
-<button id="add-widget" class="pure-button pure-button-primary" style="float:right;margin-right:30px;" title="add new widget">add widget</button>
+<button id="add-widget" class="pure-button pure-button-primary"
+  style="float:right;margin-right:30px;"
+  title="add new widget">add widget</button>
 </div>
 else ()
 }
@@ -263,9 +281,13 @@ else ()
     <iframe name="render-frame"/>
  </div>
 </div>
-<a href="https://github.com/xquery/dashML"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"/></a>
+<a href="https://github.com/xquery/dashML">
+<img style="position: absolute; top: 0; right: 0; border: 0;"
+ src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
+ alt="Fork me on GitHub"/></a>
 <footer>
-  &copy; 2013 MarkLogic <span style="float:right;">last updated: {current-dateTime()}</span>
+  &copy; 2013 MarkLogic
+  <span style="float:right;">last updated: {current-dateTime()}</span>
 </footer>
 </body>
 </html>
@@ -291,10 +313,9 @@ function view:handle-dash-post(
         dash-model:create( xdmp:get-request-field("name"),
         <dash xmlns="https://github.com/dashML/model/dash">
           <title>{xdmp:get-request-field("name")}</title>
-          </dash>)
+        </dash>)
     return xdmp:redirect-response("/builder/" || $id)
 };
-
 
 
 
@@ -327,7 +348,6 @@ function view:handle-widget-post(
 
 
 
-
 (:~ view:handle-configure() - sets current dash to edit
 :
 : @param id
@@ -347,7 +367,7 @@ function view:handle-configure(
 
 
 
-(:~ view:handle-widget-delete() - remove widget from dash 
+(:~ view:handle-widget-delete() - remove widget from dash
 :
 : @param id
 :
@@ -362,10 +382,10 @@ function view:handle-widget-delete(
   $widget-id
 )
 {
-    let $_ := dash-model:remove-widget-to-dash(xs:unsignedLong($id),xs:unsignedLong($widget-id))
+    let $_ := dash-model:remove-widget-to-dash(xs:unsignedLong($id),
+        xs:unsignedLong($widget-id))
     return xdmp:redirect-response("/builder/" || $id)
 };
-
 
 
 (:~ view:handle-delete() - remove dash
@@ -414,99 +434,96 @@ let $xslt := <xsl:transform
     exclude-result-prefixes="math xdmp xs meter"
     extension-element-prefixes="math xdmp history-model"
     version="2.0">
-
-    <xsl:variable name="period" select="xdmp:get-request-field('period','raw')"/>
-    
-<xdmp:import-module namespace="https://github.com/dashML/model/history"
-                    href="modules/history-model.xqy"/>
-
+    <xsl:variable name="period"
+      select="xdmp:get-request-field('period','raw')"/>
+    <xdmp:import-module namespace="https://github.com/dashML/model/history"
+    href="modules/history-model.xqy"/>
    <xsl:template match="model:dash">
      <div class="pure-g-r">
        <xsl:apply-templates select="model:widget"/>
      </div>
    </xsl:template>
-
    <xsl:template match="model:widget[model:type eq 'sparkline']">
-     <xsl:variable name="data" select="
-     if(model:resource eq 'databases')
-         then
-         history-model:get-database(
-  model:meter/string(),$period,
-  (),current-dateTime(),
-  'sum','xml',true(),false(),
-  ())[1]/*
-  else if (model:resource eq 'hosts') then
-      history-model:get-host(
-  model:meter/string(),$period,
-  (),current-dateTime(),
-  'sum','xml',true(),false(),
-  ())
-  else if (model:resource eq 'servers') then
-      history-model:get-server(
-  model:meter/string(),$period,
-  (),current-dateTime(),
-  'sum','xml',true(),false(),
-  ())
-  else
-      history-model:get-forest(
-  model:meter/string(),$period,
-  (),current-dateTime(),
-  'sum','xml',true(),false(),
-  ())
-     "/>
-     <div  title="{{$data//*:desc}}" class="pure-u-1-3 dashboard-piece dashboard-piece-{{if(model:resource eq 'servers') then 'blue'
-     else if(model:resource eq 'hosts') then 'purple'
-     else if(model:resource eq 'forests') then 'orange'
-     else 'red'}}bg">
+     <xsl:variable name="data"
+       select="history-model:get-metrics(model:resource/string(),
+         model:meter/string(),$period)"/>
+     <div title="{{$data//*:desc}}"
+       class="pure-u-1-3 dashboard-piece dashboard-piece-{{
+         if(model:resource eq 'servers') then 'gray'
+         else if(model:resource eq 'hosts') then 'purple'
+         else if(model:resource eq 'forests') then 'orange'
+         else 'blue'}}bg">
        <div class="dashboard-content">
-       <span class="resource"><a href="http://localhost:8002/manage/v2/{{model:resources}}" target="_resources"><xsl:value-of select="model:resource"/></a>[<xsl:value-of select="$data/*:summary/*:count/data(.)"/>]</span><br/>
+       <span class="resource"><a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resources}}"
+         target="_resources"><xsl:value-of select="model:resource"/></a>[<xsl:value-of select="$data/*:summary/*:count/data(.)"/>]</span><br/>
        <span style="font-size: 2.0em;line-height: 1;"><xsl:value-of select="model:meter"/></span>
        <h2>
-             <span class="inlinesparkline">
-             <xsl:value-of select="string-join($data/*:summary/*:data/*:entry/*:value,',')"/>
-             </span>
+         <span class="inlinesparkline">
+           <xsl:value-of select=" history-model:generate-sparkle-data($data)"/>
+         </span>
        </h2>
-       <p class="dashboard-metric"><xsl:value-of select="$data/*:summary/*:data/*:entry[last()]/*:value"/>
+       <p class="dashboard-metric">
+           <xsl:value-of select="$data/*:summary/*:data/*:entry[last()]/*:value"/>
        <span class="units"><xsl:value-of select="$data/*:units"/></span>
        </p>
-       
        <p class="maxminavg small">
        min: <xsl:value-of select="min($data/*:summary/*:data/*:entry/*:value)"/> |
-       max: <xsl:value-of select="max($data/*:summary/*:data/*:entry/*:value)"/> <br/>       
+       max: <xsl:value-of select="max($data/*:summary/*:data/*:entry/*:value)"/> <br/>
        avg: <xsl:value-of select="round-half-to-even(avg($data/*:summary/*:data/*:entry/*:value),2)"/> |
        mean: <xsl:value-of select="round-half-to-even(math:median($data/*:summary/*:data/*:entry/*:value),2)"/> <br/>
        stdev:  <xsl:value-of select="round-half-to-even(math:stddev($data/*:summary/*:data/*:entry/*:value),2)"/>
        </p>
-
       <span class="xml">[
-       <a href="http://localhost:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=xml" target="_xml">xml</a> |
-       <a href="http://localhost:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=html" target="_html">html</a> |
-       <a href="http://localhost:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=json" target="_json">json</a>
+       <a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=xml" target="_xml">xml</a> |
+       <a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=html" target="_html">html</a> |
+       <a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=json" target="_json">json</a>
       ]</span>
        </div>
+     </div>
+   </xsl:template>
+   <xsl:template match="model:widget[model:type eq 'log']">
+     <xsl:variable name="data"
+       select="history-model:get-metrics(model:resource/string(),
+         model:meter/string(),$period)"/>
+     <div title="{{$data//*:desc}}"
+       class="pure-u-1-3 dashboard-piece dashboard-piece-{{
+         if(model:resource eq 'servers') then 'gray'
+         else if(model:resource eq 'hosts') then 'purple'
+         else if(model:resource eq 'forests') then 'orange'
+         else 'blue'}}bg">
+       <div class="dashboard-content">
+       <span class="resource"><a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resources}}"
+         target="_resources"><xsl:value-of select="model:resource"/></a>[<xsl:value-of select="$data/*:summary/*:count/data(.)"/>]</span><br/>
+       <span style="font-size: 2.0em;line-height: 1;"><xsl:value-of select="model:meter"/></span>
+       <h2>
+         <span class="inlinesparkline">
+           <xsl:value-of select=" history-model:generate-sparkle-data($data)"/>
+         </span>
+       </h2>
+       <p class="dashboard-metric">
+           <xsl:value-of select="$data/*:summary/*:data/*:entry[last()]/*:value"/>
+       <span class="units"><xsl:value-of select="$data/*:units"/></span>
+       </p>
        
-     </div>
-            
-   </xsl:template>
-
-   <xsl:template match="model:widget[model:type eq 'meter']">
-       <div class="pure-u-1-4">
-       display meter widget<br/>
-       <a href="/history/{{model:resource}}/{{model:meter}}/raw">link</a>
-       meter:<xsl:value-of select="model:resource"/>:<xsl:value-of select="model:meter"/>
+       <div class="log-display">
+       <ul>
+       <xsl:copy-of select='history-model:generate-log-data(
+           "Error",
+           model:meter,
+           current-dateTime(),
+           model:resource,$period)'/>
+       </ul>
        </div>
-   </xsl:template>
-
-   <xsl:template match="model:widget[model:type eq 'timeseries']">
-     <div class="pure-u-1-4">
-     display timeseries widget<br/>
-       <a href="/history/{{model:resource}}/{{model:meter}}/raw">xml</a>
-       meter:<xsl:value-of select="model:resource"/>:<xsl:value-of select="model:meter"/>
+       
+      <!--span class="xml">[
+       <a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=xml" target="_xml">xml</a> |
+       <a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=html" target="_html">html</a> |
+       <a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=json" target="_json">json</a>
+      ]</span-->
+       </div>
      </div>
    </xsl:template>
-
   <xsl:template match="text()"/>
-
 </xsl:transform>
 
 let $xml  := dash-model:get(xs:unsignedLong($id))
@@ -518,8 +535,10 @@ return
 <title>dashML</title>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width"/>
-<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.1.0/pure-min.css"></link>
-<link rel="stylesheet" href="http://weloveiconfonts.com/api/?family=fontawesome"></link>
+<link rel="stylesheet"
+  href="http://yui.yahooapis.com/pure/0.1.0/pure-min.css"></link>
+<link rel="stylesheet"
+  href="http://weloveiconfonts.com/api/?family=fontawesome"></link>
 <link rel="stylesheet" href="/resources/css/main.css"></link>
 <link rel="stylesheet" href="/resources/css/custom.css"></link>
 <script src="/resources/js/vendor/modernizr-2.6.2.min.js">>&#160;</script>
@@ -534,14 +553,7 @@ return
           lineColor:'#000',
           fillColor:'#ccc'
       }});
-      $('.dbinlinesparkline').sparkline('html',{{
-          type:'line',
-          height:80,
-          width:200,
-          lineColor:'#000',
-          fillColor:'#ccc',
-          composite:true
-      }});  }})
+  }})
 </script>
 </head>
 <body>
@@ -554,7 +566,7 @@ return
         <li class="{if($d/@id/string(.) eq $id) then 'pure-menu-selected' else ()}"><a href="/render/{$d/@id}" >{$d/dash-model:title/data(.)}</a></li>
         }
       </ul>
-      <span class="make-live"> Live <input id="makelive" type="checkbox" title="make live"/> <!-- refresh (secs) <input id="refresh" size="2" type="text" value="10"/--></span>      <span style="padding-right:10px;float:right;"><select id="period">
+      <span class="make-live"> Live <input id="makelive" type="checkbox" title="refresh every 30 seconds"/> <!-- refresh (secs) <input id="refresh" size="2" type="text" value="10"/--></span>      <span style="padding-right:10px;float:right;"><select id="period">
       {if(xdmp:get-request-field('period')) then
       if(xdmp:get-request-field('period') eq 'hour')
           then <option value="hour">last 24 hours</option>
@@ -562,7 +574,7 @@ return
           then <option value="day">last 30 days</option>
           else <option value="raw">last 60 minutes</option>
       else ()}
-      <optgroup label="----------"></optgroup>          
+      <optgroup label="----------"></optgroup>
       <option value="raw">last 60 minutes</option>
       <option value="hour">last 24 hours</option>
       <option value="day">last 30 days</option>
@@ -574,7 +586,8 @@ return
     {$result}
   </section>
   <footer>
-  &copy; 2013 MarkLogic <span style="float:right;">last updated: {current-dateTime()}</span>
+  &copy; 2013 MarkLogic
+  <span style="float:right;">last updated: {current-dateTime()}</span>
   </footer>
   <script src="/resources/js/plugins.js">&#160;</script>
   <script src="/resources/js/main.js">&#160;</script>
@@ -582,7 +595,6 @@ return
 </html>
 )
 };
-
 
 
 (:~ view:get-database() -
@@ -611,6 +623,8 @@ let $result := history-model:get-database(
 return $result[1]/*
 };
 
+
+(:~ PLAN FOR USE IF WIDGET IS STANDALONE VIA AJAX :)
 
 (:~ view:get-forest() -
 :
@@ -691,4 +705,28 @@ let $result := history-model:get-host(
   "sum","xml",true(),false(),
   ())
 return $result
+};
+
+
+
+declare
+  %rxq:GET
+  %rxq:path('/log/remove')
+function view:remove-error-triples(
+    $id
+)
+{
+    history-model:remove-error-triples()
+};
+
+
+declare
+  %rxq:GET
+  %rxq:path('/log/load')
+function view:load-error-triples(
+    $id
+)
+{
+let $_ :=    history-model:load-error-triples()
+    return 'OK'
 };

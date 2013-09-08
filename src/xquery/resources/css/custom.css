@@ -109,3 +109,12 @@ body .primary-button {
     background: #02a6eb;
     color: #fff;
 }
+
+.log-display {
+    margin-left:60px;
+    background:#ddd;
+    width:350px;
+    height:150px;
+    overflow:auto;
+    color:black;
+    }

@@ -163,3 +163,13 @@ return
     assert:schematron-validate("validate server meters",$sch,$results)
 )
 };
+
+(:
+declare %test:case function test-log-data()
+{
+let $results := history-model:generate-log-data("","",xs:dateTime("2013-09-08T14:31:00+02:00"))
+return assert:equal("", $results, ())
+    
+};
+
+:)
