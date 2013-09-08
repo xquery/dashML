@@ -485,6 +485,12 @@ let $xslt := <xsl:transform
      <xsl:variable name="data"
        select="history-model:get-metrics(model:resource/string(),
          model:meter/string(),$period)"/>
+     <xsl:variable name="errors" select='history-model:generate-log-data(
+           "Error",
+           model:meter,
+           current-dateTime(),
+           model:resource,$period)'/>
+         
      <div title="{{$data//*:desc}}"
        class="pure-u-1-3 dashboard-piece dashboard-piece-{{
          if(model:resource eq 'servers') then 'gray'
@@ -494,25 +500,33 @@ let $xslt := <xsl:transform
        <div class="dashboard-content">
        <span class="resource"><a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resources}}"
          target="_resources"><xsl:value-of select="model:resource"/></a>[<xsl:value-of select="$data/*:summary/*:count/data(.)"/>]</span><br/>
-       <span style="font-size: 2.0em;line-height: 1;"><xsl:value-of select="model:meter"/></span>
-       <h2>
-         <span class="inlinesparkline">
-           <xsl:value-of select=" history-model:generate-sparkle-data($data)"/>
-         </span>
-       </h2>
-       <p class="dashboard-metric">
+       <span class="{{if($errors) then 'red' else ()}}" style="font-size: 2.0em;line-height: 1;"><xsl:value-of select="model:meter"/></span>
+       <p class="dashboard-metric-log">
            <xsl:value-of select="$data/*:summary/*:data/*:entry[last()]/*:value"/>
        <span class="units"><xsl:value-of select="$data/*:units"/></span>
        </p>
-       
+       log level: <i><xsl:value-of select="$errors[1]/*:loglevel"/></i>       
        <div class="log-display">
-       <ul>
-       <xsl:copy-of select='history-model:generate-log-data(
-           "Error",
-           model:meter,
-           current-dateTime(),
-           model:resource,$period)'/>
-       </ul>
+       <table class="pure-table pure-table-striped">
+       <thead>
+       <tr>
+       <th>ts</th>
+       <th>name</th>
+       <th>value</th>
+       <th></th>
+       </tr>
+       </thead>
+       <tbody>
+       <xsl:for-each select="$errors">
+        <tr title="{{*:message}}">
+          <td style="font-size:.8em"><xsl:value-of select="*:ts"/></td>
+          <td><xsl:value-of select="*:name"/></td>
+          <td><xsl:value-of select="*:value"/></td>
+          <td><a>i</a></td>
+        </tr>
+       </xsl:for-each>
+       </tbody>
+       </table>
        </div>
        
       <!--span class="xml">[

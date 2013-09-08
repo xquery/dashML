@@ -111,10 +111,22 @@ body .primary-button {
 }
 
 .log-display {
-    margin-left:60px;
-    background:#ddd;
-    width:350px;
-    height:150px;
+    margin-left:20px;
+    background:#fff;
+    width:430px;
+    height:200px;
     overflow:auto;
     color:black;
     }
+
+.dashboard-metric-log {
+    text-transform: uppercase;
+    font-size: 2.5em;
+    line-height: 1;
+    margin-top:5px;
+    margin-bottom:0px;
+}
+
+.red{
+color:#E73F3F;
+ }

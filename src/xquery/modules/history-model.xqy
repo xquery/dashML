@@ -329,9 +329,11 @@ let $message := map:get($object,"message")
 let $value := map:get($object,"value")
 let $r := substring-before(map:get($object,"meters"),'/')
 return
-    element div {
-        element span {map:get($object,"ts") },<br/>,
-        element i {map:get($object,"message")},<br/>,
-        element span {$tr[@id = $r]/tr-model:name/string(.) || " = " || map:get($object,"value")},<hr/>
+    element error {
+        element loglevel {$loglevel},
+        element ts {map:get($object,"ts") },
+        element message {map:get($object,"message")},
+        element name {$tr[@id = $r]/tr-model:name/string(.)},
+        element value {map:get($object,"value")}
     }
 };
