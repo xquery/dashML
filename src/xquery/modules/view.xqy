@@ -43,6 +43,7 @@ function view:spec() as element()
   <div class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-blackbg">
     <ul>
       <li class="pure-menu-selected"><a href="/">dashML</a></li>
+      <li><a href="/setup">setup &amp; instructions</a></li>
       <li><a href="/builder">build dashboards</a></li>
     </ul>
   </div>
@@ -165,6 +166,7 @@ function view:builder(
 <div class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-blackbg">
     <ul>
         <li><a href="/">dashML</a></li>
+        <li><a href="/setup">setup &amp; instructions</a></li>
         <li class="pure-menu-selected"><a href="/builder">build dashboards</a></li>
     </ul>
 </div>
@@ -505,15 +507,14 @@ let $xslt := <xsl:transform
            <xsl:value-of select="$data/*:summary/*:data/*:entry[last()]/*:value"/>
        <span class="units"><xsl:value-of select="$data/*:units"/></span>
        </p>
-       log level: <i><xsl:value-of select="$errors[1]/*:loglevel"/></i>       
-       <div class="log-display">
-       <table class="pure-table pure-table-striped">
+       log level: <i><xsl:value-of select="$errors[1]/*:loglevel"/></i>
+       <div class="pure-u log-display">
+       <table class="pure-table pure-table-striped log-table">
        <thead>
        <tr>
        <th>ts</th>
        <th>name</th>
        <th>value</th>
-       <th></th>
        </tr>
        </thead>
        <tbody>
@@ -522,7 +523,6 @@ let $xslt := <xsl:transform
           <td style="font-size:.8em"><xsl:value-of select="*:ts"/></td>
           <td><xsl:value-of select="*:name"/></td>
           <td><xsl:value-of select="*:value"/></td>
-          <td><a>i</a></td>
         </tr>
        </xsl:for-each>
        </tbody>

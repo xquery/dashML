@@ -110,12 +110,15 @@ body .primary-button {
     color: #fff;
 }
 
+.log-table {
+    min-width:50px;
+    }
+
 .log-display {
-    margin-left:20px;
     background:#fff;
-    width:430px;
-    height:200px;
     overflow:auto;
+    max-height:280px;
+    min-width:50px;
     color:black;
     }
 
@@ -130,3 +133,4 @@ body .primary-button {
 .red{
 color:#E73F3F;
  }
+
