@@ -99,7 +99,10 @@ function view:spec() as element()
                     <ul>
                       <li>marklogic 7.0 history performance meters</li>
                       <li><a href="http://github.com/xquery/rxq" target="_new">rxq</a>- app framework based on RESTXQ annotations for rapid development</li>
-                      <li><a href="http://purecss.io/" target="_new">purecss</a>- easy to use css bootstrap to make my rubbish look pretty</li>
+                      <li><a href="http://purecss.io/" target="_new">purecss</a>- easy to use css bootstrap, from Yahoo, to make my rubbish css/html look somewhat acceptable</li>
+                      <li><a href="http://purecss.io/" target="_new">jquery</a>-</li>
+                      <li><a href="http://purecss.io/" target="_new">spectrum</a>- easy to use jquery color picker</li>
+                      <li><a href="http://purecss.io/" target="_new">sparkline</a>- generates mini graphs</li>
                     </ul>
                 </div>
             </div>
@@ -123,8 +126,86 @@ function view:spec() as element()
                     <h4 class="content-subhead">Caveat Emptor</h4>
                     <ul>
                       <li>I made GET do bad things (as in not idempotent)</li>
-                      <li>time constraints = quick code generate (though there are xray unit tests and schema validation)</li>
+                      <li>time constraints = quick code generate (though there are some xray unit tests)</li>
+                      <li>no error checking (other then schema validation)</li>
                       <li>probably a long list of other things done poorly ...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+ </div>
+<a href="https://github.com/xquery/dashML"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"/></a>
+<footer>
+  &copy; 2013 MarkLogic <span style="float:right;">last updated: {current-dateTime()}</span>
+</footer>
+</body>
+</html>
+};
+
+
+
+(:~ view:setup() - about dashML page
+:
+: @param id
+:
+: @return html
+:)
+declare
+  %rxq:GET
+  %rxq:path('/setup')
+  %rxq:produces('text/html')
+function view:setup() as element()
+{
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Setup - dashML</title>
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.1.0/pure-min.css"></link>
+<link rel="stylesheet" href="http://weloveiconfonts.com/api/?family=fontawesome"></link>
+<link rel="stylesheet" href="/resources/css/main.css"></link>
+<link rel="stylesheet" href="/resources/css/custom.css"></link>
+<script src="/resources/js/vendor/modernizr-2.6.2.min.js">>&#160;</script>
+</head>
+<body>
+  <div class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-blackbg">
+    <ul>
+      <li><a href="/">dashML</a></li>
+      <li class="pure-menu-selected"><a href="/setup">setup &amp; instructions</a></li>
+      <li><a href="/builder">build dashboards</a></li>
+    </ul>
+  </div>
+  <div class="splash">
+    <div class="pure-g-r">
+            <div class="pure-u-1-3">
+                <div class="l-box splash-text">
+                    <h1 class="splash-head">
+                        Video
+                    </h1>
+                    <h2 class="splash-subhead">
+                        .
+                    </h2>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ <div class="content">
+        <div class="pure-g-r content-ribbon">
+            <div class="pure-u-2-3">
+                <div class="l-box">
+                    <h4 class="content-subhead">Instructions</h4>
+                    <ul>
+                       <li>create dashboards based</li>
+                       <li>add widgetss</li>
+                       <li>view dashboard</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pure-u-2-3">
+                <div class="l-box">
+                    <h4 class="content-subhead">Setup for Expiremental ErrorLog viewer widget</h4>
+                    <ul>
+                      <li>clear ErrorLog triples</li>
+                      <li>load ErrorLog triples</li>
                     </ul>
                 </div>
             </div>
@@ -160,7 +241,11 @@ function view:builder(
   <link rel="stylesheet" href="http://weloveiconfonts.com/api/?family=fontawesome"></link>
   <link rel="stylesheet" href="/resources/css/main.css"></link>
   <link rel="stylesheet" href="/resources/css/custom.css"></link>
+  <link rel='stylesheet' href='/resources/css/spectrum.css' ></link>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">&#160;</script>
   <script src="/resources/js/vendor/modernizr-2.6.2.min.js">>&#160;</script>
+  <script src='/resources/js/spectrum.js'></script>
+
 </head>
 <body>
 <div class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-blackbg">
@@ -180,8 +265,8 @@ function view:builder(
         <table  class="pure-table dash-table">
          <thead>
         <tr>
-            <th>dash name</th>
-            <th colspan="3">actions</th>
+            <th>dashboard name</th>
+            <th colspan="2">actions</th>
         </tr>
     </thead>
     <tbody>
@@ -200,12 +285,6 @@ function view:builder(
                 <a href="/builder/{$dash-id}"
                   title="edit dash" class="pure-button">
                 edit
-                </a>
-              </td>
-              <td>
-                <a href="/render/{$dash-id}" target="render-frame"
-                  title="view dash" class="pure-button">
-                view
                 </a>
               </td>
               <td>
@@ -235,7 +314,7 @@ function view:builder(
    <table  class="pure-table widget-table">
      <thead>
        <tr>
-         <th>title</th>
+         <th>color</th>
          <th>type</th>
          <th>resource</th>
          <th>meter</th>
@@ -260,7 +339,7 @@ function view:builder(
 {
 if($id) then
 <div>
-<input id="title" name="title" type="text"/>
+<input name="color" type="color" value='#FFF'/>
 <select name="type">
   <option value="sparkline">standard widget</option>
   <option value="log">ErrorLog (experimental)</option>
@@ -280,7 +359,12 @@ else ()
  </div>
  <div class="pure-u-1-2 render-div">
     <h2>dashML view</h2>
+    {if($id)
+    then 
+    <iframe name="render-frame" src="/render/{$id}"/>
+    else
     <iframe name="render-frame"/>
+    }
  </div>
 </div>
 <a href="https://github.com/xquery/dashML">
@@ -335,11 +419,12 @@ function view:handle-widget-post(
   $id
   )
 {
+    let $_ :=xdmp:log( xdmp:get-request-field("color"))
     let $m := tokenize(xdmp:get-request-field("meter"),":")
     let $_ := dash-model:add-widget-to-dash(xs:unsignedLong($id),
         element widget {
             attribute id {xdmp:random(100000000000000)},
-            element title { xdmp:get-request-field("title")},
+            element title { xdmp:get-request-field("color")},
             element type {xdmp:get-request-field("type")},
             element resource {$m[1]},
             element meter {$m[2]}
@@ -454,9 +539,8 @@ let $xslt := <xsl:transform
          if(model:resource eq 'servers') then 'gray'
          else if(model:resource eq 'hosts') then 'purple'
          else if(model:resource eq 'forests') then 'orange'
-         else 'blue'}}bg">
-       <div class="dashboard-content">
-       <span class="category"><xsl:value-of select="model:title/data(.)"/></span>
+         else 'blue'}}bg" >
+       <div class="dashboard-content" style="color:{{model:title/string(.)}}">
        <span class="resource"><a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resources}}"
          target="_resources"><xsl:value-of select="model:resource"/></a>[<xsl:value-of select="$data/*:summary/*:count/data(.)"/>]</span><br/>
        <span style="font-size: 2.0em;line-height: 1;"><xsl:value-of select="model:meter"/></span>

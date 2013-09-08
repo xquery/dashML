@@ -28,30 +28,34 @@ element optgroup {
     element optgroup {
         attribute label {"databases"},
         for $s in $mdecl:database-status-names
+        order by $s
         return element option{
             attribute value {"databases:" || $s},
-            $s }
+            "databases: " || $s }
     },
     element optgroup {
         attribute label {"hosts"},
         for $s in $mdecl:host-status-names
+        order by $s
         return element option{
             attribute value {"hosts:" || $s},
-            $s }
+            "hosts: " || $s }
     },
     element optgroup {
         attribute label {"servers"},
         for $s in $mdecl:server-status-names
+        order by $s
         return element option{
             attribute value {"servers:" || $s},
-            $s }
+            "servers: " || $s }
     },
     element optgroup {
         attribute label {"forests"},
         for $s in ( $mdecl:forest-status-names,$mdecl:forest-counts-names)
+        order by $s
         return element option{
             attribute value {"forests:" || $s},
-            $s }
+            "forests: " || $s }
     }
   }
 };
