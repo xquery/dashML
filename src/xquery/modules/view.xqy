@@ -262,8 +262,8 @@ if($id) then
 <div>
 <input id="title" name="title" type="text"/>
 <select name="type">
-  <option>sparkline</option>
-  <option>log</option>
+  <option value="sparkline">standard widget</option>
+  <option value="log">ErrorLog (experimental)</option>
   <!--option>timeseries</option-->
 </select>
 <select name="meter">
@@ -456,6 +456,7 @@ let $xslt := <xsl:transform
          else if(model:resource eq 'forests') then 'orange'
          else 'blue'}}bg">
        <div class="dashboard-content">
+       <span class="category"><xsl:value-of select="model:title/data(.)"/></span>
        <span class="resource"><a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resources}}"
          target="_resources"><xsl:value-of select="model:resource"/></a>[<xsl:value-of select="$data/*:summary/*:count/data(.)"/>]</span><br/>
        <span style="font-size: 2.0em;line-height: 1;"><xsl:value-of select="model:meter"/></span>

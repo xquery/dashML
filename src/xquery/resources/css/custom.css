@@ -19,6 +19,15 @@ span.small {
     line-height:90%
 }
 
+.category {
+     border-style:solid;
+    float:left;
+    font-size:80%;
+    margin-left:4px;
+    color:gray;
+    background:white;
+}
+
 .resource {
     float:right;
     font-size:80%;

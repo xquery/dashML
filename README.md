@@ -13,6 +13,7 @@ MarkLogic 7.0
 First, you need to download and install MarkLogic 7. Second, create an appserver, providing the following details;
 
 * root: provide directory where dashml/src/xquery was copied to your filesystem
+* database: Meters
 * set error handler: /rxq-rewriter.xqy?mode=error
 * set rewrite handler: /rxq-rewriter.xqy?mode=rewrite
 
