@@ -315,7 +315,7 @@ function view:builder(
          <thead>
         <tr>
             <th>dashboard name</th>
-            <th colspan="2">actions</th>
+            <th colspan="3">actions</th>
         </tr>
     </thead>
     <tbody>
