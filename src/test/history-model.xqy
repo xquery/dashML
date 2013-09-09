@@ -164,6 +164,7 @@ return
 )
 };
 
+
 (:
 declare %test:case function test-log-data()
 {

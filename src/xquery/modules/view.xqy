@@ -33,7 +33,7 @@ function view:spec() as element()
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>About - dashML</title>
-<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.1.0/pure-min.css"></link>
+<link rel="stylesheet" href="/resources/css/pure-min.css"></link>
 <link rel="stylesheet" href="http://weloveiconfonts.com/api/?family=fontawesome"></link>
 <link rel="stylesheet" href="/resources/css/main.css"></link>
 <link rel="stylesheet" href="/resources/css/custom.css"></link>
@@ -43,7 +43,7 @@ function view:spec() as element()
   <div class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-blackbg">
     <ul>
       <li class="pure-menu-selected"><a href="/">dashML</a></li>
-      <li><a href="/setup">setup &amp; instructions</a></li>
+      <li><a href="/instructions">instructions</a></li>
       <li><a href="/builder">build dashboards</a></li>
     </ul>
   </div>
@@ -152,14 +152,15 @@ function view:spec() as element()
 :)
 declare
   %rxq:GET
-  %rxq:path('/setup')
+  %rxq:path('/instructions')
   %rxq:produces('text/html')
-function view:setup() as element()
+function view:instructions()
 {
-<html xmlns="http://www.w3.org/1999/xhtml">
+('<!DOCTYPE html>',
+<html>
 <head>
   <title>Setup - dashML</title>
-<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.1.0/pure-min.css"></link>
+<link rel="stylesheet" href="/resources/css/pure-min.css"></link>
 <link rel="stylesheet" href="http://weloveiconfonts.com/api/?family=fontawesome"></link>
 <link rel="stylesheet" href="/resources/css/main.css"></link>
 <link rel="stylesheet" href="/resources/css/custom.css"></link>
@@ -169,44 +170,91 @@ function view:setup() as element()
   <div class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-blackbg">
     <ul>
       <li><a href="/">dashML</a></li>
-      <li class="pure-menu-selected"><a href="/setup">setup &amp; instructions</a></li>
+      <li class="pure-menu-selected"><a href="/instructions">instructions</a></li>
       <li><a href="/builder">build dashboards</a></li>
     </ul>
   </div>
   <div class="splash">
     <div class="pure-g-r">
             <div class="pure-u-1-3">
+                <div class="l-box splash-image">
+                    <img src="/resources/history-screenshot.jpg"
+                         height="270" width="450"
+                         alt="Placeholder image for example."/>
+                </div>
+            </div>
+            <div class="pure-u-2-3">
                 <div class="l-box splash-text">
                     <h1 class="splash-head">
-                        Video
+                        Instructions how to use dashML
                     </h1>
-                    <h2 class="splash-subhead">
-                        .
-                    </h2>
-
+                    <p>
+                        <a href="/resources/video/shot1.mp4" target="_video" class="pure-button primary-button">
+                          Watch the video</a>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
  <div class="content">
         <div class="pure-g-r content-ribbon">
-            <div class="pure-u-2-3">
-                <div class="l-box">
-                    <h4 class="content-subhead">Instructions</h4>
+            <div class="pure-g">
+                <div class="pure-u-1-4">
+                    <h4 class="content-subhead">Create a dashboard</h4>
                     <ul>
-                       <li>create dashboards based</li>
-                       <li>add widgetss</li>
-                       <li>view dashboard</li>
+                       <li>goto 'Build Dashboards'</li>
+                       <li>supply a dashboard name</li>
+                       <li>click 'create dashboard'</li>
                     </ul>
                 </div>
+                <div class="pure-u-1-2">
+                 <div class="l-box splash-image">
+                    <img src="/resources/instructions1.png"
+                         height="400" width="650"
+                         alt="add dashboard."/>
+                </div>
+                </div>
             </div>
-            <div class="pure-u-2-3">
-                <div class="l-box">
-                    <h4 class="content-subhead">Setup for Expiremental ErrorLog viewer widget</h4>
+            <hr/>
+            <div class="pure-g">
+                <div class="pure-u-1-4">
+                    <h4 class="content-subhead">Add widget</h4>
                     <ul>
-                      <li>clear ErrorLog triples</li>
-                      <li>load ErrorLog triples</li>
+                      <li>goto 'Build Dashboards'</li>
+                      <li>create a new dashboard or edit an existing one</li>
+                      <li>choose dashboard title color</li>
+                      <li>select 'standard widget'</li>
+                      <li>select metric of interest</li>
+                      <li>view dashboard in viewer or click dashboard name to view in its own browser window</li>
                     </ul>
+                </div>
+                <div class="pure-u-1-2">
+                 <div class="l-box splash-image">
+                    <img src="/resources/instructions2.png"
+                         height="400" width="650"
+                         alt="add dashboard."/>
+                </div>
+                </div>
+            </div>
+            <br/>
+            <div class="pure-g">
+                <div class="pure-u-1-4">
+                    <h4 class="content-subhead">Try out experimental widgets</h4>
+                    <ul>
+                      <li>goto 'Build Dashboards'</li>
+                      <li>create a new dashboard or edit an existing one</li>
+                      <li>choose dashboard title color</li>
+                      <li>select 'ErrorLog widget'</li>
+                      <li>view dashboard in viewer or click dashboard name to view in its own browser window</li>
+                      <li>on the ErrorLog Widget, click '[ generate test errors &amp; reload ErrorLog triples ]' link to generate some test errors and load ErrorLog as triples</li>
+                    </ul>
+                </div>
+                <div class="pure-u-1-2">
+                 <div class="l-box splash-image">
+                    <img src="/resources/instructions3.jpg"
+                         height="400" width="650"
+                         alt="add dashboard."/>
+                </div>
                 </div>
             </div>
         </div>
@@ -217,6 +265,7 @@ function view:setup() as element()
 </footer>
 </body>
 </html>
+)
 };
 
 
@@ -237,12 +286,12 @@ function view:builder(
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>dashML</title>
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.1.0/pure-min.css"></link>
+  <link rel="stylesheet" href="/resources/css/pure-min.css"></link>
   <link rel="stylesheet" href="http://weloveiconfonts.com/api/?family=fontawesome"></link>
   <link rel="stylesheet" href="/resources/css/main.css"></link>
   <link rel="stylesheet" href="/resources/css/custom.css"></link>
   <link rel='stylesheet' href='/resources/css/spectrum.css' ></link>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">&#160;</script>
+  <script src="/resources/js/vendor/jquery-1.9.1.min.js">&#160;</script>
   <script src="/resources/js/vendor/modernizr-2.6.2.min.js">>&#160;</script>
   <script src='/resources/js/spectrum.js'></script>
 
@@ -251,7 +300,7 @@ function view:builder(
 <div class="pure-menu pure-menu-open pure-menu-horizontal pure-menu-blackbg">
     <ul>
         <li><a href="/">dashML</a></li>
-        <li><a href="/setup">setup &amp; instructions</a></li>
+        <li><a href="/instructions">instructions</a></li>
         <li class="pure-menu-selected"><a href="/builder">build dashboards</a></li>
     </ul>
 </div>
@@ -419,7 +468,6 @@ function view:handle-widget-post(
   $id
   )
 {
-    let $_ :=xdmp:log( xdmp:get-request-field("color"))
     let $m := tokenize(xdmp:get-request-field("meter"),":")
     let $_ := dash-model:add-widget-to-dash(xs:unsignedLong($id),
         element widget {
@@ -572,12 +620,12 @@ let $xslt := <xsl:transform
      <xsl:variable name="data"
        select="history-model:get-metrics(model:resource/string(),
          model:meter/string(),$period)"/>
-     <xsl:variable name="errors" select='history-model:generate-log-data(
+     <xsl:variable name="errors" select='history-model:get-error-log-data(
            "Error",
            model:meter,
            current-dateTime(),
            model:resource,$period)'/>
-         
+           
      <div title="{{$data//*:desc}}"
        class="pure-u-1-3 dashboard-piece dashboard-piece-{{
          if(model:resource eq 'servers') then 'gray'
@@ -589,7 +637,7 @@ let $xslt := <xsl:transform
          target="_resources"><xsl:value-of select="model:resource"/></a>[<xsl:value-of select="$data/*:summary/*:count/data(.)"/>]</span><br/>
        <span class="{{if($errors) then 'red' else ()}}" style="font-size: 2.0em;line-height: 1;"><xsl:value-of select="model:meter"/></span>
        <p class="dashboard-metric-log">
-           <xsl:value-of select="$data/*:summary/*:data/*:entry[last()]/*:value"/>
+         ><xsl:value-of select="$data/*:summary/*:data/*:entry[last()]/*:value"/>
        <span class="units"><xsl:value-of select="$data/*:units"/></span>
        </p>
        log level: <i><xsl:value-of select="$errors[1]/*:loglevel"/></i>
@@ -598,7 +646,7 @@ let $xslt := <xsl:transform
        <thead>
        <tr>
        <th>ts</th>
-       <th>name</th>
+       <th><xsl:value-of select="model:resource"/></th>
        <th>value</th>
        </tr>
        </thead>
@@ -613,12 +661,10 @@ let $xslt := <xsl:transform
        </tbody>
        </table>
        </div>
-       
-      <!--span class="xml">[
-       <a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=xml" target="_xml">xml</a> |
-       <a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=html" target="_html">html</a> |
-       <a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resource}}?view=metrics&amp;{{replace(model:resource,'s$','')}}-metrics={{model:meter}}&amp;period={{$period}}&amp;format=json" target="_json">json</a>
-      ]</span-->
+       <br/>
+      <span class="xml">[
+       <a href="/log/reload" target="_test">generate test errors &amp; reload ErrorLog triples</a>
+      ]</span>
        </div>
      </div>
    </xsl:template>
@@ -635,13 +681,13 @@ return
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width"/>
 <link rel="stylesheet"
-  href="http://yui.yahooapis.com/pure/0.1.0/pure-min.css"></link>
+  href="/resources/css/pure-min.css"></link>
 <link rel="stylesheet"
   href="http://weloveiconfonts.com/api/?family=fontawesome"></link>
 <link rel="stylesheet" href="/resources/css/main.css"></link>
 <link rel="stylesheet" href="/resources/css/custom.css"></link>
+<script src="/resources/js/vendor/jquery-1.9.1.min.js">&#160;</script>
 <script src="/resources/js/vendor/modernizr-2.6.2.min.js">>&#160;</script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">&#160;</script>
 <script type="text/javascript" language="javascript" src="/resources/sparkle/sparkle.js">&#160;</script>
 <script type="text/javascript">
   $(function() {{
@@ -688,6 +734,7 @@ return
   &copy; 2013 MarkLogic
   <span style="float:right;">last updated: {current-dateTime()}</span>
   </footer>
+  
   <script src="/resources/js/plugins.js">&#160;</script>
   <script src="/resources/js/main.js">&#160;</script>
 </body>
@@ -695,6 +742,29 @@ return
 )
 };
 
+
+(:~ view:reload-error-triples() - converts ErrorLog into triples and loads into triple store
+:
+: @param id
+:
+: @return html
+:)
+declare
+  %rxq:GET
+  %rxq:path('/log/reload')
+function view:reload-error-triples(
+    $id
+)
+{
+let $_ := history-model:generate-test-error()
+let $_ := history-model:remove-error-log-triples()
+let $_ := history-model:load-error-triples()
+return 'OK'
+};
+
+
+
+(:~ TODO - PROVIDE METERS API FOR USE WHEN DASHBOARD WIDGETS CONSUME JSON :)
 
 (:~ view:get-database() -
 :
@@ -721,9 +791,6 @@ let $result := history-model:get-database(
   ())
 return $result[1]/*
 };
-
-
-(:~ PLAN FOR USE IF WIDGET IS STANDALONE VIA AJAX :)
 
 (:~ view:get-forest() -
 :
@@ -804,28 +871,4 @@ let $result := history-model:get-host(
   "sum","xml",true(),false(),
   ())
 return $result
-};
-
-
-
-declare
-  %rxq:GET
-  %rxq:path('/log/remove')
-function view:remove-error-triples(
-    $id
-)
-{
-    history-model:remove-error-triples()
-};
-
-
-declare
-  %rxq:GET
-  %rxq:path('/log/load')
-function view:load-error-triples(
-    $id
-)
-{
-let $_ :=    history-model:load-error-triples()
-    return 'OK'
 };

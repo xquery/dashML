@@ -219,22 +219,23 @@ declare function history:get-log(
       )[2]
 };
 
-declare function history:refresh-error-log-triples(){
-    let $_ := sem:graph-delete(sem:iri('error_log'))
-    return history:load-error-triples()
- };
-declare function history:remove-error-triples()
+
+declare function history:remove-error-log-triples()
 {
       xdmp:eval('
       import module namespace sem="http://marklogic.com/semantics"
       at "/MarkLogic/semantics.xqy";
       sem:graph-delete(sem:iri("error_log"))
       ',  (),
-		  <options xmlns="xdmp:eval">
-		    <isolation>different-transaction</isolation>
-		  </options>)
-    
+      <options xmlns="xdmp:eval">
+        <isolation>different-transaction</isolation>
+      </options>)
  };
+
+
+declare function history:generate-test-error(){
+    xdmp:log("dashML errorlog test:" || current-dateTime(), "error")
+};
 
 
 declare function history:load-error-triples(){
@@ -252,10 +253,10 @@ let $triples := for $line in $lines
   let $date := $pieces[1] || "T" || replace(substring-before($pieces[2],'.'),'([0-9][0-9])$','00') 
   let $info := substring-after($line,$pieces[2])
   let $subject := sem:iri("http://marklogic.com/logfile/request/" || xdmp:md5($line)) where count($pieces) gt 0
-  return
+    return
       if( substring-before($info,":") eq 'Info')
-          then ()
-          else
+        then ()
+        else
         (
           $make($subject, "a", "ml:Request"),
           $make($subject, "ml:timestamp", if($date castable as xs:dateTime) then
@@ -266,12 +267,11 @@ let $triples := for $line in $lines
           $make($subject, "ml:message", $info),
           $make($subject, "a", substring-before($info,":"))
         )
-
 return sem:graph-insert(sem:iri('error_log'), $triples)
 };
 
 
-declare function history:generate-log-data(
+declare function history:get-error-log-data(
     $loglevel as xs:string,
     $meter as xs:string,
     $end as xs:dateTime,
