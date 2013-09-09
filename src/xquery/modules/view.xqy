@@ -331,6 +331,12 @@ function view:builder(
                 </a>
               </td>
               <td>
+                <a href="/render/{$dash-id}"
+                  title="view dash" target="_dash{$dash-id}" class="pure-button">
+                view
+                </a>
+              </td>
+              <td>
                 <a href="/builder/{$dash-id}"
                   title="edit dash" class="pure-button">
                 edit
