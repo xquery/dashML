@@ -24,14 +24,14 @@ var to;
     if(getParameterByName("live") == "true"){
         $('#makelive').prop('checked', true);
            setTimeout(function(){
-               window.location.href=window.location.href
+               window.location.href= window.location.href.replace(/\?.*/,'') + '?live=true'
            }, 30000);
      }
 
     $('#makelive').change(function(){
        if (this.checked){
            setTimeout(function(){
-               window.location.href=window.location.href + '?live=true'
+               window.location.href= window.location.href.replace(/\?.*/,'') + '?live=true'
            }, 30000);
        }else{
                window.location.href=window.location.href.replace(/\?.*/,'')

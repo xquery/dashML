@@ -23,6 +23,8 @@ With everything setup, you can now point your web browser to http://localhost:##
 
 Click onto instructions tab or go direct to building dashboards.
 
+If you are installing on a brand new ML7 instance, you may have to wait a little while for metrics to generate before building (and viewing) dashboards.
+
 ## To install tests
 
 create an appserver, providing the following details;
