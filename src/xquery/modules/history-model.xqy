@@ -23,6 +23,10 @@ declare namespace rxq="﻿http://exquery.org/ns/restxq";
 declare option xdmp:mapping "false";
 
 
+(:~ history:get-metric-names - generate list of metric names for drop down selection
+:
+: @returns
+:)
 declare function history:get-metric-names(){
 element optgroup {
     element optgroup {
@@ -61,6 +65,20 @@ element optgroup {
 };
 
 
+(:~ history:get-database - get database metrics, as alternate to using Manage API
+:
+: @param meter
+: @param period
+: @param start
+: @param end
+: @param aggregation
+: @param format
+: @param summary
+: @param detail
+: @param databases
+:
+: @returns
+:)
 declare function history:get-database(
   $meter as xs:string,
   $period as xs:string,
@@ -86,6 +104,21 @@ declare function history:get-database(
 };
 
 
+
+(:~ history:get-forest - get forest metrics, as alternate to using Manage API
+:
+: @param meter
+: @param period
+: @param start
+: @param end
+: @param aggregation
+: @param format
+: @param summary
+: @param detail
+: @param databases
+:
+: @returns
+:)
 declare function history:get-forest(
   $meter as xs:string,
   $period as xs:string,
@@ -110,6 +143,22 @@ declare function history:get-forest(
       $meter,$period,$start,$end,$params)
 };
 
+
+
+(:~ history:get-host - get host metrics, as alternate to using Manage API
+:
+: @param meter
+: @param period
+: @param start
+: @param end
+: @param aggregation
+: @param format
+: @param summary
+: @param detail
+: @param hosts
+:
+: @returns
+:)
 
 declare function history:get-host(
   $meter as xs:string,
@@ -136,6 +185,21 @@ declare function history:get-host(
 };
 
 
+
+(:~ history:get-server - get server metrics, as alternate to using Manage API
+:
+: @param meter
+: @param period
+: @param start
+: @param end
+: @param aggregation
+: @param format
+: @param summary
+: @param detail
+: @param servers
+:
+: @returns
+:)
 declare function history:get-server(
   $meter as xs:string,
   $period as xs:string,
@@ -161,6 +225,14 @@ declare function history:get-server(
 };
 
 
+(:~ history:get-metrics - generic entry point
+:
+: @param resource
+: @param meter
+: @param period
+:
+: @returns
+:)
 declare function history:get-metrics(
     $resource as xs:string,
     $meter as xs:string,
@@ -194,6 +266,13 @@ declare function history:get-metrics(
 };
 
 
+(:~ history:generate-sparkle-data - helper function for massaging data
+:                                   into format required for sparkline
+:
+: @param data
+:
+: @returns
+:)
 declare function history:generate-sparkle-data(
     $data
 )
@@ -203,6 +282,12 @@ declare function history:generate-sparkle-data(
 };
 
 
+(:~ history:get-log - obtain error log from HTTP to avoid file path differences
+:
+: @param logfile
+:
+: @returns
+:)
 declare function history:get-log(
     $logfile as xs:string
 )
@@ -220,6 +305,11 @@ declare function history:get-log(
 };
 
 
+
+(:~ history:remove-error-log-triples - remove error_log triple graph
+:
+: @returns
+:)
 declare function history:remove-error-log-triples()
 {
       xdmp:eval('
@@ -233,11 +323,21 @@ declare function history:remove-error-log-triples()
  };
 
 
+
+(:~ history:generate-test-error - insert an error log trace into ErrorLog.txt
+:
+: @returns
+:)
 declare function history:generate-test-error(){
     xdmp:log("dashML errorlog test:" || current-dateTime(), "error")
 };
 
 
+
+(:~ history:load-error-triples - load ErrorLog.txt as triples into error_log graph
+:
+: @returns
+:)
 declare function history:load-error-triples(){
 
 let $make := sem:rdf-builder(
@@ -271,6 +371,17 @@ return sem:graph-insert(sem:iri('error_log'), $triples)
 };
 
 
+
+(:~ history:get-error-log-data - return error log data for meter widget
+:
+: @param loglevel
+: @param meter
+: @param end
+: @param resource
+: @param period
+:
+: @returns
+:)
 declare function history:get-error-log-data(
     $loglevel as xs:string,
     $meter as xs:string,
