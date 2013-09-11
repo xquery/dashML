@@ -6,7 +6,7 @@ MarkLogic 7.0 introduces more tools for monitoring the performance of your MarkL
  
 ## Requirements
 
-MarkLogic 7.0
+MarkLogic 7.0 (latest nightly preferably)
 
 ## To install
 
