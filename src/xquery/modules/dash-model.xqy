@@ -69,12 +69,12 @@ declare function model:create(
 {
   let $id := xdmp:random(100000000000000)
 
-  let $_ := try {
+(:  let $_ := try {
     validate strict {$xml}
     }catch($e){
     error((),$model:_DASHML_ERR_CREATE,"Cannot validate payload")
     }
-
+:)
     let $dash := element model:dash {
     attribute id {$id},
     if($xml/model:title)
@@ -109,12 +109,12 @@ declare function model:update(
 ) as element(model:id)
 {
 
-  let $_ := try {
+(:  let $_ := try {
     validate strict {$xml}
     }catch($e){
     error((),$model:_DASHML_ERR_CREATE,"Cannot validate payload on update")
     }
-
+:)
     let $dash := element model:dash {
         attribute id {$id},
         $xml/*
