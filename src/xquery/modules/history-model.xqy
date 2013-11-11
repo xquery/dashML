@@ -2,12 +2,12 @@ xquery version "1.0-ml";
 
 module namespace history = "https://github.com/dashML/model/history";
 
-(:~ module: history - custom entry points to unofficial meters API
+(:~ module: history - custom entry points to unofficial MarkLogic meters API
 :
 :)
 
 import module namespace meter="http://marklogic.com/manage/meters"
-    at "/MarkLogic/manage/meter/meter.xqy";
+  at "/MarkLogic/manage/meter/meter.xqy";
 
 import module namespace mdecl="http://marklogic.com/manage/meters/decl"
   at "/MarkLogic/manage/meter/meter-decl.xqy";
@@ -21,7 +21,6 @@ import module namespace tr-model = "http://marklogic.com/manage/meters/transient
 declare namespace rxq="﻿http://exquery.org/ns/restxq";
 
 declare option xdmp:mapping "false";
-
 
 (:~ history:get-metric-names - generate list of metric names for drop down selection
 :

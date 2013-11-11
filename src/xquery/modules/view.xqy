@@ -226,6 +226,8 @@ function view:instructions()
                       <li>select 'standard widget'</li>
                       <li>select metric of interest</li>
                       <li>view dashboard in viewer or click dashboard name to view in its own browser window</li>
+                      <li>in dashboard, choose 'live' to enable auto page refresh</li>
+                      <li>in dashboard, choose time period ex. 'last 60 minutes'</li>
                     </ul>
                 </div>
                 <div class="pure-u-1-2">
@@ -595,8 +597,8 @@ let $xslt := <xsl:transform
          else if(model:resource eq 'forests') then 'orange'
          else 'blue'}}bg" >
        <div class="dashboard-content" style="color:{{model:title/string(.)}}">
-       <span class="resource"><a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resources}}"
-         target="_resources"><xsl:value-of select="model:resource"/></a>[<xsl:value-of select="$data/*:summary/*:count/data(.)"/>]</span><br/>
+       <span class="resource"><a href="http://{{xdmp:host-name()}}:8002/manage/v2/{{model:resource}}"
+         target="_resources" title="view {{model:resource}}"><xsl:value-of select="model:resource"/></a>[<xsl:value-of select="$data/*:summary/*:count/data(.)"/>]</span><br/>
        <span style="font-size: 2.0em;line-height: 1;"><xsl:value-of select="model:meter"/></span>
        <h2>
          <span class="inlinesparkline">
