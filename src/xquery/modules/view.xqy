@@ -17,6 +17,8 @@ declare namespace meter="http://marklogic.com/manage/meters";
 
 declare default element namespace "https://github.com/dashML/model/dash";
 
+declare option xdmp:mapping "false";
+
 
 (:~ view:spec() - about dashML page
 :
@@ -136,7 +138,7 @@ function view:spec() as element()
  </div>
 <a href="https://github.com/xquery/dashML"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"/></a>
 <footer>
-  &copy; 2013 MarkLogic <span style="float:right;">last updated: {current-dateTime()}</span>
+  &copy; 2013 <a href="https://github.com/xquery/dashML">Jim Fuller</a> <span style="float:right;">last updated: {current-dateTime()}</span>
 </footer>
 </body>
 </html>
@@ -189,8 +191,8 @@ function view:instructions()
                         Instructions how to use dashML
                     </h1>
                     <p>
-                        <a href="/resources/video/shot1.mp4" target="_video" class="pure-button primary-button">
-                          Watch the video</a>
+                        <a href="/builder" class="pure-button primary-button">
+                          Start Building Dashboards</a>
                     </p>
                 </div>
             </div>
@@ -263,7 +265,7 @@ function view:instructions()
  </div>
 <a href="https://github.com/xquery/dashML"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"/></a>
 <footer>
-  &copy; 2013 MarkLogic <span style="float:right;">last updated: {current-dateTime()}</span>
+  &copy; 2013 <a href="https://github.com/xquery/dashML">Jim Fuller</a> <span style="float:right;">last updated: {current-dateTime()}</span>
 </footer>
 </body>
 </html>
@@ -309,7 +311,7 @@ function view:builder(
 <div class="pure-g-r">
     <div class="pure-u-1-2 builder-div">
     <h2>dashML build</h2>
-    <i>add, view and remove dashboards.
+    <i>add, edit, view &amp; remove dashboard tab.
     </i>
     <form method="POST" action="/builder" class="pure-form">
       <fieldset>
@@ -429,7 +431,7 @@ else ()
  src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
  alt="Fork me on GitHub"/></a>
 <footer>
-  &copy; 2013 MarkLogic
+  &copy; 2013 <a href="https://github.com/xquery/dashML">Jim Fuller</a>
   <span style="float:right;">last updated: {current-dateTime()}</span>
 </footer>
 </body>
@@ -739,7 +741,7 @@ return
     {$result}
   </section>
   <footer>
-  &copy; 2013 MarkLogic
+  &copy; 2013 <a href="https://github.com/xquery/dashML">Jim Fuller</a>
   <span style="float:right;">last updated: {current-dateTime()}</span>
   </footer>
   
