@@ -66,6 +66,10 @@ some thoughts on future features
 * no error checking (other then schema validation)
 * probably a long list of other things done poorly ...
 
+## License
+
+dashML is released under Apache License, Version 2.0
+
 ## More Info on technologies
 
 The following are links on the other technologies used in this application.
