@@ -15,7 +15,7 @@ First, you need to download and install MarkLogic 7.
 
 Second, create an appserver, providing the following details;
 
-* **root**: provide directory where dashml/src/xquery was copied to your filesystem
+* **root**: provide directory where dashml/src/xquery was copied to your filesystem (ex. /opt/dashml/src/xquery)
 * **port**: choose a port ####
 * **set database**: set to Meters database
 * **set error handler**: /rxq-rewriter.xqy?mode=error
