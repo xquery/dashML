@@ -62,7 +62,7 @@ some thoughts on future features
 ## Caveat Emptor
 
 * I made GET do bad things (as in not idempotent)
-* time constraints = quick code generate (though there are some xray unit tests)
+* time constraints = quick code generate ('though there are some xray unit tests' he says in a hopeful tone ...)
 * no error checking (other then schema validation)
 * probably a long list of other things done poorly ...
 
