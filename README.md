@@ -7,7 +7,7 @@ dashML provides a tabbed interface of metrics, which you can view on your smart 
 
 ## Requirements
 
-MarkLogic 7.0 (latest nightly preferably)
+[MarkLogic 7.0](http://developer.marklogic.com) (latest version)
 
 ## To install
 
