@@ -55,18 +55,25 @@ declare variable $dash-error := <dash>
 </dash>;
 
 declare %test:setup function setup()
-{(
+{
+ (
   xdmp:document-insert(
      "999999.xml",
      $test:dash,
      xdmp:default-permissions(),
      ("dashml"), 10),
+     
   xdmp:eval('
-  xdmp:document-load("/Users/jfuller/Source/Webcomposite/dashML/src/xquery/schemas/dash.xsd")
+  xquery version "1.0-ml";
+
+  xdmp:document-load("/Users/jfuller/Source/Webcomposite/dashML/src/xquery/schemas/dash.xsd",
+      <options xmlns="xdmp:document-load">
+    <uri>/dash.xsd</uri>
+  </options>)
   ', (),
         <options xmlns="xdmp:eval">
             <database>{xdmp:schema-database()}</database>
-        </options>)
+    </options>)
  )
 };
 
@@ -220,7 +227,7 @@ return (
     )
 };
 
-declare %test:case function z-add-dash-check-validate()
+declare %test:ignore %test:case function z-add-dash-check-validate()
 {
 let $result := try{ dash-model:create(
     "runtimetest",
@@ -235,7 +242,7 @@ let $result := try{ dash-model:create(
     </dash>)
 }catch($e){$e}
     return
-        assert:equal($result//error:code,
+        assert:equal($result,
           <error:code xmlns:error="http://marklogic.com/xdmp/error">DASHML_ERR_CREATE</error:code>)
 };
 
@@ -261,7 +268,7 @@ let $result := dash-model:update(
 };
 
 
-declare %test:case function z-update-dash-validate()
+declare %test:ignore %test:case function z-update-dash-validate()
 {
 let $getall  := dash-model:all()
 let $id      := $getall/*[@id ne 9999999999]/@id/data()
