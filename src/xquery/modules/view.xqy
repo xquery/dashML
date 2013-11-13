@@ -16,6 +16,8 @@ declare namespace rxq="﻿http://exquery.org/ns/restxq";
 declare namespace html="﻿http://www.w3.org/1999/xhtml";
 declare namespace meter="http://marklogic.com/manage/meters";
 
+declare default function namespace "http://www.w3.org/2005/xpath-functions";
+
 declare default element namespace "https://github.com/dashML/model/dash";
 
 declare option xdmp:mapping "false";

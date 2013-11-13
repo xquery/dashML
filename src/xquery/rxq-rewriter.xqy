@@ -31,6 +31,8 @@ import module namespace rxq="﻿http://exquery.org/ns/restxq" at "/lib/rxq.xqy";
 import module namespace view = "https://github.com/dashML/view"
   at "/modules/view.xqy";
 
+declare default function namespace "http://www.w3.org/2005/xpath-functions";
+
 (: define non-restxq REST requests, example illustrates passthru mode :)
 declare namespace rest = "http://marklogic.com/appservices/rest";
 declare variable $default-requests as element(rest:request)* := (

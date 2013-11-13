@@ -17,6 +17,8 @@ module namespace model = "https://github.com/dashML/model/dash";
 import module namespace meter="http://marklogic.com/manage/meters"
     at "/MarkLogic/manage/meter/meter.xqy";
 
+declare default function namespace "http://www.w3.org/2005/xpath-functions";
+    
 declare default element namespace "https://github.com/dashML/model/dash";
 
 declare namespace rxq="﻿http://exquery.org/ns/restxq";

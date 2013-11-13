@@ -18,6 +18,8 @@ import module namespace sem="http://marklogic.com/semantics"
 import module namespace tr-model = "http://marklogic.com/manage/meters/transient-resource/model"
   at "/MarkLogic/manage/meter/models/transient-resource-model.xqy";
 
+declare default function namespace "http://www.w3.org/2005/xpath-functions";
+  
 declare namespace rxq="﻿http://exquery.org/ns/restxq";
 
 declare option xdmp:mapping "false";
