@@ -8,7 +8,8 @@ module namespace view = "https://github.com/dashML/view";
 
 import module namespace dash-model = "https://github.com/dashML/model/dash"
   at "dash-model.xqy";
-import module namespace history-model = "https://github.com/dashML/model/history"
+
+  import module namespace history-model = "https://github.com/dashML/model/history"
   at "history-model.xqy";
 
 declare namespace rxq="﻿http://exquery.org/ns/restxq";
@@ -478,7 +479,7 @@ function view:handle-widget-post(
   $id
   )
 {
-    let $m := tokenize(xdmp:get-request-field("meter"),":")
+    let $m := fn:tokenize(xdmp:get-request-field("meter"),":")
     let $_ := dash-model:add-widget-to-dash(xs:unsignedLong($id),
         element widget {
             attribute id {xdmp:random(100000000000000)},
@@ -796,7 +797,7 @@ function view:get-databases(
 {
 let $result := history-model:get-database(
   $meter,$period,
-  (),current-dateTime(),
+  (),fn:current-dateTime(),
   "sum","xml",true(),false(),
   ())
 return $result[1]/*
@@ -822,7 +823,7 @@ function view:get-forests(
 {
 let $result := history-model:get-forest(
   $meter,$period,
-  (),current-dateTime(),
+  (),fn:current-dateTime(),
   "sum","xml",true(),false(),
   ())
 return $result
@@ -849,7 +850,7 @@ function view:get-servers(
 {
 let $result := history-model:get-server(
   $meter,$period,
-  (),current-dateTime(),
+  (),fn:current-dateTime(),
   "sum","xml",true(),false(),
   ())
 return $result
@@ -877,7 +878,7 @@ function view:get-hosts(
 {
 let $result := history-model:get-host(
   $meter,$period,
-  (),current-dateTime(),
+  (),fn:current-dateTime(),
   "sum","xml",true(),false(),
   ())
 return $result

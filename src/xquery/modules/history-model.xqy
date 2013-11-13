@@ -241,25 +241,25 @@ declare function history:get-metrics(
     case "databases" return
          history:get-database(
              $meter,$period,
-             (),current-dateTime(),
+             (),fn:current-dateTime(),
              'sum','xml',true(),false(),
              ())[1]/*
     case "hosts" return
       history:get-host(
           $meter,$period,
-          (),current-dateTime(),
+          (),fn:current-dateTime(),
           'sum','xml',true(),false(),
           ())
     case "servers" return
       history:get-server(
           $meter,$period,
-          (),current-dateTime(),
+          (),fn:current-dateTime(),
           'sum','xml',true(),false(),
           ())
     default return
       history:get-forest(
           $meter,$period,
-          (),current-dateTime(),
+          (),fn:current-dateTime(),
           'sum','xml',true(),false(),
           ())
 };
@@ -276,8 +276,8 @@ declare function history:generate-sparkle-data(
     $data
 )
 {
-    string-join( for $entry at $pos in $data/*:summary/*:data/*:entry
-    return concat($pos,':',$entry/*:value/string()),',' )
+    fn:string-join( for $entry at $pos in $data/*:summary/*:data/*:entry
+    return fn:concat($pos,':',$entry/*:value/string()),',' )
 };
 
 
@@ -348,12 +348,12 @@ let $errorlogdata := history:get-log("ErrorLog.txt")
 let $lines := fn:tokenize($errorlogdata, "&#10;")
 
 let $triples := for $line in $lines
-  let $pieces := tokenize($line,' ')
-  let $date := $pieces[1] || "T" || replace(substring-before($pieces[2],'.'),'([0-9][0-9])$','00') 
+  let $pieces := fn:tokenize($line,' ')
+  let $date := $pieces[1] || "T" || fn:replace(fn:substring-before($pieces[2],'.'),'([0-9][0-9])$','00') 
   let $info := substring-after($line,$pieces[2])
-  let $subject := sem:iri("http://marklogic.com/logfile/request/" || xdmp:md5($line)) where count($pieces) gt 0
+  let $subject := sem:iri("http://marklogic.com/logfile/request/" || xdmp:md5($line)) where fn:count($pieces) gt 0
     return
-      if( substring-before($info,":") eq 'Info')
+      if( fn:substring-before($info,":") eq 'Info')
         then ()
         else
         (
@@ -364,7 +364,7 @@ let $triples := for $line in $lines
             else $date
           ),
           $make($subject, "ml:message", $info),
-          $make($subject, "a", substring-before($info,":"))
+          $make($subject, "a", fn:substring-before($info,":"))
         )
 return sem:graph-insert(sem:iri('error_log'), $triples)
 };
@@ -403,7 +403,7 @@ let $tr := switch($resource)
     default return ()
 
     let $_ := xdmp:log($tr)
-let $check := concat("PREFIX xs: <http://www.w3.org/2001/XMLSchema#>
+let $check := fn:concat("PREFIX xs: <http://www.w3.org/2001/XMLSchema#>
 ASK
 FROM <error_log>
 FROM <meters>
@@ -435,13 +435,13 @@ let $objects:= if(sem:sparql($check))
     then sem:sparql($s)
     else ()
 
-for $n in (1 to count($objects))
+for $n in (1 to fn:count($objects))
 let $object := $objects[$n]
 let $ts := map:get($object,"ts")
 let $info := map:get($object,"info")
 let $message := map:get($object,"message")
 let $value := map:get($object,"value")
-let $r := substring-before(map:get($object,"meters"),'/')
+let $r := fn:substring-before(map:get($object,"meters"),'/')
 return
     element error {
         element loglevel {$loglevel},
