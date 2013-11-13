@@ -160,7 +160,7 @@ declare %test:case function z-add-widget-to-dash()
 {
 
 let $getall  := dash-model:all()
-let $dash-id := $getall/*[@id ne 9999999999]/@id/data(.)
+let $dash-id := $getall/*[@id ne 9999999999][1]/@id/data(.)
 let $result  :=
     xdmp:eval('
     import module namespace dash-model = "https://github.com/dashML/model/dash"
@@ -191,7 +191,7 @@ declare %test:case function z-remove-widget-to-dash()
 {
 
 let $getall  := dash-model:all()
-let $dash-id := $getall/*[@id ne 9999999999]/@id/data(.)
+let $dash-id := $getall/*[@id ne 9999999999][1]/@id/data(.)
 let $widget-id := 4444444444
 let $result  :=
     xdmp:eval('
@@ -286,7 +286,7 @@ let $result := try{ dash-model:update(
 declare %test:case function zz-remove-dash()
 {
 let $getall  := dash-model:all()
-let $id      := $getall/*[@id ne 9999999999]/@id/data()
+let $id      := $getall/*[@id ne 9999999999][1]/@id/data()
 let $results := xdmp:eval('
     import module namespace dash-model = "https://github.com/dashML/model/dash"
     at "/xquery/modules/dash-model.xqy";
