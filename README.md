@@ -33,6 +33,8 @@ Click onto instructions tab or go direct to building dashboards.
 
 Just goto http://localhost:####/instructions
 
+then start building simple dashboards.
+
 ## To install/run tests
 
 create an appserver, providing the following details;
