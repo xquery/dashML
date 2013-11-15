@@ -1,8 +1,10 @@
 # dashML v0.1
 
-[MarkLogic 7.0](http://developer.marklogic.com) introduces more tools for monitoring the performance of your MarkLogic server. dashML leverages these tools to make it easy to create lightweight, responsive dashboards giving you up-to-date information on the health and performance of your applications.
+I thought it would be fun to cook up a little bauble that leverages new features found in MarkLogic 7.
 
-dashML provides a tabbed interface of metrics, which you can view on your smart phone, tablet or any browser. 
+[MarkLogic 7.0](http://developer.marklogic.com) introduces more tools for monitoring the performance of your MarkLogic server. dashML leverages these tools to make it easy to create lightweight, dashboards giving you up-to-date information on the health and performance of your applications.
+
+dashML provides a tabbed interface of metrics, which you can view on your smart phone, tablet or any browser via the magic of responsive templates. 
 ![dashML](src/xquery/resources/history-screenshot.jpg) 
 
 ## Requirements
@@ -61,8 +63,8 @@ some thoughts on future features
 
 ## Caveat Emptor
 
-* I made GET do bad things (as in not idempotent)
 * time constraints = quick code generate ('though there are some xray unit tests' he says in a hopeful tone ...)
+* I made GET do bad things (as in not idempotent)
 * no error checking (other then schema validation)
 * probably a long list of other things done poorly ...
 
