@@ -4,9 +4,10 @@ I thought it would be fun to cook up a little bauble that leverages new [feature
 
 [MarkLogic 7.0](http://developer.marklogic.com) introduces more tools for monitoring the performance of your MarkLogic server. dashML leverages these [tools](http://docs.marklogic.com/guide/monitoring/history) to make it easy to create lightweight, dashboards giving you up-to-date information on the health and performance of your applications.
 
-dashML provides a tabbed interface of metrics, which you can view on your smart phone, tablet or any browser via the magic of responsive templates. 
+dashML provides a tabbed interface of MarkLogic server history monitoring metrics.
 ![dashML](src/xquery/resources/history-screenshot.jpg) 
 
+This provides a snapshot of the health of your server which you can view on your smart phone, tablet or any browser that supports responsive templates.
 ## Requirements
 
 [MarkLogic 7.0](http://developer.marklogic.com) (latest version)
