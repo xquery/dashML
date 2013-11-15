@@ -1,8 +1,8 @@
 # dashML v0.1
 
-I thought it would be fun to cook up a little bauble that leverages new features found in MarkLogic 7.
+I thought it would be fun to cook up a little bauble that leverages new [features](http://docs.marklogic.com/guide/relnotes/chap3) found in MarkLogic 7.
 
-[MarkLogic 7.0](http://developer.marklogic.com) introduces more tools for monitoring the performance of your MarkLogic server. dashML leverages these [http://docs.marklogic.com/guide/monitoring/history](tools) to make it easy to create lightweight, dashboards giving you up-to-date information on the health and performance of your applications.
+[MarkLogic 7.0](http://developer.marklogic.com) introduces more tools for monitoring the performance of your MarkLogic server. dashML leverages these [tools](http://docs.marklogic.com/guide/monitoring/history) to make it easy to create lightweight, dashboards giving you up-to-date information on the health and performance of your applications.
 
 dashML provides a tabbed interface of metrics, which you can view on your smart phone, tablet or any browser via the magic of responsive templates. 
 ![dashML](src/xquery/resources/history-screenshot.jpg) 
