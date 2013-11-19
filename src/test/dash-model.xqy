@@ -66,7 +66,7 @@ declare %test:setup function setup()
   xdmp:eval('
   xquery version "1.0-ml";
 
-  xdmp:document-load("/Users/jfuller/Source/Webcomposite/dashML/src/xquery/schemas/dash.xsd",
+  xdmp:document-load("/Users/jfuller/Source/Webcomposite/dashML/etc/dash.xsd",
       <options xmlns="xdmp:document-load">
     <uri>/dash.xsd</uri>
   </options>)
@@ -227,7 +227,7 @@ return (
     )
 };
 
-declare %test:ignore %test:case function z-add-dash-check-validate()
+declare %test:case function z-add-dash-check-validate()
 {
 let $result := try{ dash-model:create(
     "runtimetest",
@@ -239,10 +239,10 @@ let $result := try{ dash-model:create(
         <resource>forests</resource>
         <meter>deleted-fragment-count</meter>
       </badwidget>
-    </dash>)
+    </dash>,fn:true())
 }catch($e){$e}
     return
-        assert:equal($result,
+        assert:equal($result//error:code[1],
           <error:code xmlns:error="http://marklogic.com/xdmp/error">DASHML_ERR_CREATE</error:code>)
 };
 
@@ -268,7 +268,7 @@ let $result := dash-model:update(
 };
 
 
-declare %test:ignore %test:case function z-update-dash-validate()
+declare %test:case function z-update-dash-validate()
 {
 let $getall  := dash-model:all()
 let $id      := $getall/*[@id ne 9999999999]/@id/data()
@@ -283,10 +283,10 @@ let $result := try{ dash-model:update(
         <resource>forests</resource>
         <meter>deleted-fragment-count</meter>
       </badwidget>
-    </dash>)
+    </dash>,fn:true())
     }catch($e){$e}
     return
-        assert:equal($result//error:code,<error:code xmlns:error="http://marklogic.com/xdmp/error">DASHML_ERR_CREATE</error:code>)
+        assert:equal($result//error:code[1],<error:code xmlns:error="http://marklogic.com/xdmp/error">DASHML_ERR_CREATE</error:code>)
 };
 
 

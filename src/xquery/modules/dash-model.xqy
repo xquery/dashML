@@ -29,7 +29,9 @@ declare variable $model:_DASHML_ERR_CREATE := "DASHML_ERR_CREATE";
 
 declare variable $model:_COLLECTION := "dashml";
 
-(:~ model:all() -
+declare variable $model:_VALIDATE := fn:false();
+
+(:~ model:all() - return all dash
 :
 : @param
 :
@@ -43,7 +45,7 @@ declare function model:all() as element(model:dashes)
 };
 
 
-(:~ model:get() -
+(:~ model:get() - get dash by id
 :
 : @param id
 :
@@ -57,7 +59,7 @@ $id
 };
 
 
-(:~ model:create() -
+(:~ model:create() - create dash
 :
 : @param title
 : @param xml
@@ -69,15 +71,35 @@ declare function model:create(
     $xml as element(model:dash)
 ) as element(model:id)
 {
+    model:create($title,$xml,$model:_VALIDATE)
+};    
+
+
+(:~ model:create() - validating create dash
+:
+: @param title
+: @param xml
+: @param validate
+:
+: @return id
+:)
+declare function model:create(
+    $title as xs:string,
+    $xml as element(model:dash),
+    $validate as xs:boolean
+) as element(model:id)
+{
   let $id := xdmp:random(100000000000000)
 
-(:  let $_ := try {
-    validate strict {$xml}
-    }catch($e){
-    error((),$model:_DASHML_ERR_CREATE,"Cannot validate payload")
-    }
-:)
-    let $dash := element model:dash {
+  let $_ := if($validate) then
+      try {
+          validate strict {$xml}
+      }catch($e){
+          error((),$model:_DASHML_ERR_CREATE,"Cannot validate payload")
+      }
+  else ()
+
+  let $dash := element model:dash {
     attribute id {$id},
     if($xml/model:title)
         then $xml/*
@@ -86,7 +108,8 @@ declare function model:create(
                 element title {$title},
                 $xml/(* except model:title)
              )
-    }
+  }
+  
   return
   (xdmp:document-insert(
      $id || ".xml",
@@ -98,7 +121,7 @@ declare function model:create(
 };
 
 
-(:~ model:update() -
+(:~ model:update() - update dash
 :
 : @param id
 : @param xml
@@ -110,17 +133,38 @@ declare function model:update(
     $xml as element(model:dash)
 ) as element(model:id)
 {
+    model:update($id,$xml,$model:_VALIDATE)
+};
 
-(:  let $_ := try {
-    validate strict {$xml}
-    }catch($e){
-    error((),$model:_DASHML_ERR_CREATE,"Cannot validate payload on update")
-    }
+
+(:~ model:update() - validating update dash
+:
+: @param id
+: @param xml
+: @param validate
+:
+: @return id
 :)
-    let $dash := element model:dash {
-        attribute id {$id},
-        $xml/*
-    }
+declare function model:update(
+    $id as xs:unsignedLong,
+    $xml as element(model:dash),
+    $validate as xs:boolean
+) as element(model:id)
+{
+
+  let $_ := if($validate) then
+      try {
+          validate strict {$xml}
+      }catch($e){
+          error((),$model:_DASHML_ERR_CREATE,"Cannot validate payload on update")
+      }
+  else ()
+  
+  let $dash := element model:dash {
+      attribute id {$id},
+      $xml/*
+  }
+  
   return
   (xdmp:document-insert(
      $id || ".xml",
@@ -132,16 +176,17 @@ declare function model:update(
 };
 
 
-(:~ model:remove() -
+(:~ model:remove() - remove dash by id(s)
 :
 : @param id
 :
 : @return nothing
 :)
 declare function model:remove(
-    $id as xs:unsignedLong
+    $ids as xs:unsignedLong*
 ) as empty-sequence()
 {
+    for $id in $ids
     let $base-uri := base-uri( model:get($id) )
     return xdmp:document-delete($base-uri)
 };

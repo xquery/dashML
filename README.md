@@ -43,8 +43,9 @@ create an appserver, providing the following details;
 * **root**: provide directory where dashml/src ison your filesystem
 * **port**: choose a port ####
 * **set database**: set to Meters database
+* amend src/test/dash-model line 59 to point to full path where etc/dash.xsd is
 
-Now point your web browser to http://localhost:####/xray which will run all tests
+Now point your web browser to http://localhost:####/xray which will run all tests.
 
 ## FAQ
 
