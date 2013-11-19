@@ -286,7 +286,7 @@ let $result := try{ dash-model:update(
     </dash>,fn:true())
     }catch($e){$e}
     return
-        assert:equal($result//error:code[1],<error:code xmlns:error="http://marklogic.com/xdmp/error">DASHML_ERR_CREATE</error:code>)
+        assert:equal($result//error:code[1],<error:code xmlns:error="http://marklogic.com/xdmp/error">DASHML_ERR_UPDATE</error:code>)
 };
 
 

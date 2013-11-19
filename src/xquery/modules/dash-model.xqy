@@ -7,7 +7,9 @@ module namespace model = "https://github.com/dashML/model/dash";
 : model:all()
 : model:get($id)
 : model:create($title,$xml)
+: model:create($title,$xml,$validate)
 : model:update($id,$xml)
+: model:update($id,$xml,$validate)
 : model:remove($id)
 : model:add-widget-to-dash($id,$xml)
 : model:remove-widget-to-dash($id,$widget-id)
@@ -26,6 +28,7 @@ declare namespace rxq="﻿http://exquery.org/ns/restxq";
 declare option xdmp:mapping "false";
 
 declare variable $model:_DASHML_ERR_CREATE := "DASHML_ERR_CREATE";
+declare variable $model:_DASHML_ERR_UPDATE := "DASHML_ERR_UPDATE";
 
 declare variable $model:_COLLECTION := "dashml";
 
@@ -156,7 +159,7 @@ declare function model:update(
       try {
           validate strict {$xml}
       }catch($e){
-          error((),$model:_DASHML_ERR_CREATE,"Cannot validate payload on update")
+          error((),$model:_DASHML_ERR_UPDATE,"Cannot validate payload on update")
       }
   else ()
   
