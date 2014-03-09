@@ -66,7 +66,7 @@ declare %test:setup function setup()
   xdmp:eval('
   xquery version "1.0-ml";
 
-  xdmp:document-load("/Users/jfuller/Source/Webcomposite/dashML/etc/dash.xsd",
+  xdmp:document-load("/Users/jfuller/Source/3_open_source/dashml/etc/dash.xsd",
       <options xmlns="xdmp:document-load">
     <uri>/dash.xsd</uri>
   </options>)
