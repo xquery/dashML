@@ -1,5 +1,7 @@
 # dashML v0.1
 
+dashML is built with [RXQ](https://github.com/xquery/rxq) and included in that repo as an example of building RESTful apps with MarkLogic.
+
 I thought it would be fun to cook up a little bauble that leverages new [features](http://docs.marklogic.com/guide/relnotes/chap3) found in MarkLogic 7.
 
 [MarkLogic 7.0](http://developer.marklogic.com) introduces more tools for monitoring the performance of your MarkLogic server. dashML leverages these [tools](http://docs.marklogic.com/guide/monitoring/history) to make it easy to create lightweight, dashboards giving you up-to-date information on the health and performance of your applications.
